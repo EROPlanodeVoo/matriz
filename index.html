@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matriz SWOT + GUT - PLANO DE VOO ERO em Tucumã</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Estilos -->
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-elevated: #020617;
+      --accent-1: #22c55e;
+      --accent-2: #0ea5e9;
+      --accent-3: #f97316;
+      --accent-4: #ef4444;
+      --accent-muted: #64748b;
+      --border-subtle: #1e293b;
+      --text-main: #e2e8f0;
+      --text-soft: #94a3b8;
+      --card-radius: 14px;
+      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.68);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-shell {
+      max-width: 1280px;
+      width: 100%;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .title-block {
+      min-width: 260px;
+    }
+
+    .title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .title span.accent {
+      background: linear-gradient(120deg, #22c55e, #0ea5e9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .title-plan {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-soft);
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-top: 4px;
+      max-width: 520px;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-soft);
+      background: linear-gradient(120deg, rgba(15,23,42,0.95), rgba(15,23,42,0.7));
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #22c55e, #15803d);
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      color: #0f172a;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 34px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(15,23,42,0.8);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15,23,42,1);
+    }
+
+    .icon {
+      font-size: 1rem;
+    }
+
+    .main-card {
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%, #020617 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+    }
+
+    /* Tabs */
+    .tab-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn {
+      flex: 1 1 120px;
+      min-width: 120px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(15,23,42,0.7));
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .tab-btn span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+
+    .tab-btn[data-tab="forcas"] span.dot { background: var(--accent-1); }
+    .tab-btn[data-tab="fraquezas"] span.dot { background: var(--accent-4); }
+    .tab-btn[data-tab="oportunidades"] span.dot { background: var(--accent-2); }
+    .tab-btn[data-tab="ameacas"] span.dot { background: var(--accent-3); }
+    .tab-btn[data-tab="resumo"] span.dot { background: var(--accent-muted); }
+
+    .tab-btn.active {
+      color: #e5fef3;
+      border-color: rgba(148,163,184,0.6);
+      background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(14,165,233,0.24));
+      box-shadow: 0 14px 34px rgba(15,23,42,0.9);
+    }
+
+    .tab-btn .label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Summary chips */
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .summary-chip {
+      flex: 1 1 180px;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.35);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .summary-chip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .summary-chip-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .summary-chip-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .summary-chip-sub {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    /* Tab content / tabelas */
+    .tab-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .table-wrapper {
+      margin-top: 6px;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), #020617);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    thead {
+      background: linear-gradient(135deg, rgba(148,163,184,0.15), rgba(15,23,42,0.9));
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+      vertical-align: middle;
+    }
+
+    th {
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15,23,42,0.75);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(15,23,42,0.95);
+    }
+
+    tbody tr:hover {
+      background: rgba(30,64,175,0.45);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-main);
+      font-size: 0.8rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.96);
+      color: var(--text-main);
+      font-size: 0.78rem;
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      background: radial-gradient(circle at top, rgba(34,197,94,0.18), rgba(14,165,233,0.18));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease-out;
+    }
+
+    .btn-icon:hover {
+      background: rgba(15,23,42,1);
+      color: #e2e8f0;
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,1), rgba(15,23,42,0.85));
+      border-top: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .table-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .table-footer-highlight {
+      font-weight: 600;
+      color: #e5fef3;
+    }
+
+    .gut-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .gut-pill {
+      border-radius: 999px;
+      padding: 3px 8px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .add-row-btn {
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      color: var(--text-main);
+      border: 1px dashed rgba(148,163,184,0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .add-row-btn:hover {
+      background: rgba(15,23,42,1);
+    }
+
+    /* Resumo */
+    .resumo-radar-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.35);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      padding: 10px 12px 16px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .resumo-radar-card canvas {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .resumo-grid {
+      display: grid;
+      grid-template-areas:
+        "forcas oportunidades"
+        "fraquezas ameacas";
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .resumo-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.35);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .resumo-card-forcas { grid-area: forcas; }
+    .resumo-card-fraquezas { grid-area: fraquezas; }
+    .resumo-card-oportunidades { grid-area: oportunidades; }
+    .resumo-card-ameacas { grid-area: ameacas; }
+
+    .resumo-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .resumo-card-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .resumo-card-tag {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .resumo-list {
+      margin-left: 18px;
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .resumo-grid {
+        grid-template-areas:
+          "forcas"
+          "oportunidades"
+          "fraquezas"
+          "ameacas";
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Bibliotecas para PDF, Excel e Gráfico Radar (todas via cdnjs) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <div class="title-block">
+        <div class="title">
+          Matriz <span class="accent">SWOT + GUT</span>
+          <span class="title-plan">– PLANO DE VOO ERO em Tucumã</span>
+        </div>
+        <div class="subtitle">
+          Preencha forças, fraquezas, oportunidades e ameaças, atribua notas GUT
+          e veja o ranking automático com os TOP 5 na aba Resumo.
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Modo interativo – ranking em tempo real
+        </div>
+        <button class="btn btn-secondary" id="btnExportPDF">
+          <span class="icon">📄</span> Exportar PDF
+        </button>
+        <button class="btn btn-primary" id="btnExportExcel">
+          <span class="icon">📊</span> Exportar Excel
+        </button>
+      </div>
+    </header>
+
+    <main class="main-card">
+      <!-- Abas -->
+      <div class="tab-header">
+        <button class="tab-btn active" data-tab="forcas">
+          <span class="dot"></span>
+          <span class="label">Forças</span>
+        </button>
+        <button class="tab-btn" data-tab="fraquezas">
+          <span class="dot"></span>
+          <span class="label">Fraquezas</span>
+        </button>
+        <button class="tab-btn" data-tab="oportunidades">
+          <span class="dot"></span>
+          <span class="label">Oportunidades</span>
+        </button>
+        <button class="tab-btn" data-tab="ameacas">
+          <span class="dot"></span>
+          <span class="label">Ameaças</span>
+        </button>
+        <button class="tab-btn" data-tab="resumo">
+          <span class="dot"></span>
+          <span class="label">Resumo SWOT</span>
+        </button>
+      </div>
+
+      <!-- Chips de resumo rápido -->
+      <div class="summary-row">
+        <div class="summary-chip">
+          <div class="summary-chip-header">
+            <span class="summary-chip-title">Forças</span>
+            <span class="summary-chip-value" data-summary-score="forcas">0</span>
+          </div>
+          <div class="summary-chip-sub">
+            <span data-summary-items="forcas">0</span> itens avaliados
+          </div>
+        </div>
+        <div class="summary-chip">
+          <div class="summary-chip-header">
+            <span class="summary-chip-title">Fraquezas</span>
+            <span class="summary-chip-value" data-summary-score="fraquezas">0</span>
+          </div>
+          <div class="summary-chip-sub">
+            <span data-summary-items="fraquezas">0</span> itens avaliados
+          </div>
+        </div>
+        <div class="summary-chip">
+          <div class="summary-chip-header">
+            <span class="summary-chip-title">Oportunidades</span>
+            <span class="summary-chip-value" data-summary-score="oportunidades">0</span>
+          </div>
+          <div class="summary-chip-sub">
+            <span data-summary-items="oportunidades">0</span> itens avaliados
+          </div>
+        </div>
+        <div class="summary-chip">
+          <div class="summary-chip-header">
+            <span class="summary-chip-title">Ameaças</span>
+            <span class="summary-chip-value" data-summary-score="ameacas">0</span>
+          </div>
+          <div class="summary-chip-sub">
+            <span data-summary-items="ameacas">0</span> itens avaliados
+          </div>
+        </div>
+      </div>
+
+      <!-- Conteúdo das abas -->
+
+      <!-- Forças -->
+      <section class="tab-content active" id="tab-forcas">
+        <div class="gut-legend">
+          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
+          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
+          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+        </div>
+        <div class="table-wrapper">
+          <table id="table-forcas">
+            <thead>
+              <tr>
+                <th style="width:40%">Descrição</th>
+                <th style="width:15%">Importância</th>
+                <th style="width:15%">Intensidade</th>
+                <th style="width:15%">Tendência</th>
+                <th style="width:10%">Pontuação</th>
+                <th style="width:5%">⋯</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <button class="add-row-btn" onclick="addRow('forcas')">＋ Adicionar força</button>
+            </div>
+            <div class="table-footer-left">
+              Total: <span class="table-footer-highlight" data-summary-items="forcas">0</span> itens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fraquezas -->
+      <section class="tab-content" id="tab-fraquezas">
+        <div class="gut-legend">
+          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
+          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
+          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+        </div>
+        <div class="table-wrapper">
+          <table id="table-fraquezas">
+            <thead>
+              <tr>
+                <th style="width:40%">Descrição</th>
+                <th style="width:15%">Importância</th>
+                <th style="width:15%">Intensidade</th>
+                <th style="width:15%">Tendência</th>
+                <th style="width:10%">Pontuação</th>
+                <th style="width:5%">⋯</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <button class="add-row-btn" onclick="addRow('fraquezas')">＋ Adicionar fraqueza</button>
+            </div>
+            <div class="table-footer-left">
+              Total: <span class="table-footer-highlight" data-summary-items="fraquezas">0</span> itens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Oportunidades -->
+      <section class="tab-content" id="tab-oportunidades">
+        <div class="gut-legend">
+          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
+          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
+          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+        </div>
+        <div class="table-wrapper">
+          <table id="table-oportunidades">
+            <thead>
+              <tr>
+                <th style="width:40%">Descrição</th>
+                <th style="width:15%">Importância</th>
+                <th style="width:15%">Intensidade</th>
+                <th style="width:15%">Tendência</th>
+                <th style="width:10%">Pontuação</th>
+                <th style="width:5%">⋯</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <button class="add-row-btn" onclick="addRow('oportunidades')">＋ Adicionar oportunidade</button>
+            </div>
+            <div class="table-footer-left">
+              Total: <span class="table-footer-highlight" data-summary-items="oportunidades">0</span> itens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ameaças -->
+      <section class="tab-content" id="tab-ameacas">
+        <div class="gut-legend">
+          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
+          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
+          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+        </div>
+        <div class="table-wrapper">
+          <table id="table-ameacas">
+            <thead>
+              <tr>
+                <th style="width:40%">Descrição</th>
+                <th style="width:15%">Importância</th>
+                <th style="width:15%">Intensidade</th>
+                <th style="width:15%">Tendência</th>
+                <th style="width:10%">Pontuação</th>
+                <th style="width:5%">⋯</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <button class="add-row-btn" onclick="addRow('ameacas')">＋ Adicionar ameaça</button>
+            </div>
+            <div class="table-footer-left">
+              Total: <span class="table-footer-highlight" data-summary-items="ameacas">0</span> itens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo SWOT -->
+      <section class="tab-content" id="tab-resumo">
+        <!-- Radar SWOT -->
+        <div class="resumo-radar-card">
+          <div class="resumo-card-header">
+            <div class="resumo-card-title">Radar SWOT</div>
+            <div class="resumo-card-tag">Pontuação total GUT por quadrante</div>
+          </div>
+          <canvas id="radar-swot"></canvas>
+        </div>
+
+        <!-- Quadrantes em 2x2 -->
+        <div class="resumo-grid">
+          <div class="resumo-card resumo-card-forcas">
+            <div class="resumo-card-header">
+              <div class="resumo-card-title">Top 5 Forças</div>
+              <div class="resumo-card-tag" id="tag-forcas">0 itens</div>
+            </div>
+            <ol class="resumo-list" id="lista-forcas"></ol>
+          </div>
+
+          <div class="resumo-card resumo-card-oportunidades">
+            <div class="resumo-card-header">
+              <div class="resumo-card-title">Top 5 Oportunidades</div>
+              <div class="resumo-card-tag" id="tag-oportunidades">0 itens</div>
+            </div>
+            <ol class="resumo-list" id="lista-oportunidades"></ol>
+          </div>
+
+          <div class="resumo-card resumo-card-fraquezas">
+            <div class="resumo-card-header">
+              <div class="resumo-card-title">Top 5 Fraquezas</div>
+              <div class="resumo-card-tag" id="tag-fraquezas">0 itens</div>
+            </div>
+            <ol class="resumo-list" id="lista-fraquezas"></ol>
+          </div>
+
+          <div class="resumo-card resumo-card-ameacas">
+            <div class="resumo-card-header">
+              <div class="resumo-card-title">Top 5 Ameaças</div>
+              <div class="resumo-card-tag" id="tag-ameacas">0 itens</div>
+            </div>
+            <ol class="resumo-list" id="lista-ameacas"></ol>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Lógica JS -->
+  <script>
+    (function () {
+      const tipos = ["forcas", "fraquezas", "oportunidades", "ameacas"];
+      const labels = {
+        forcas: "Forças",
+        fraquezas: "Fraquezas",
+        oportunidades: "Oportunidades",
+        ameacas: "Ameaças"
+      };
+
+      let radarChart = null;
+
+      // NOVA VERSÃO: respeita a visibilidade da aba Resumo
+      function initTabs() {
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const tab = btn.dataset.tab;
+            if (!tab) return;
+
+            // troca de abas
+            tabBtns.forEach(b => b.classList.remove("active"));
+            tabContents.forEach(c => c.classList.remove("active"));
+
+            btn.classList.add("active");
+            const content = document.getElementById("tab-" + tab);
+            if (content) content.classList.add("active");
+
+            // quando abrir a aba RESUMO, força o redesenho do radar
+            if (tab === "resumo") {
+              setTimeout(() => atualizarRadar(true), 0);
+            }
+          });
+        });
+      }
+
+      function criarLinha(tipo) {
+        const tr = document.createElement("tr");
+        const placeholderPorTipo = {
+          forcas: "Descreva a força",
+          fraquezas: "Descreva a fraqueza",
+          oportunidades: "Descreva a oportunidade",
+          ameacas: "Descreva a ameaça"
+        };
+        const placeholder = placeholderPorTipo[tipo] || "Descreva o item";
+
+        const opcoes = [1, 2, 3, 4, 5].map(v => `<option value="${v}">${v}</option>`).join("");
+
+        tr.innerHTML = `
+          <td><input type="text" placeholder="${placeholder}"></td>
+          <td>
+            <select class="gut-importancia">
+              <option value="">-</option>
+              ${opcoes}
+            </select>
+          </td>
+          <td>
+            <select class="gut-intensidade">
+              <option value="">-</option>
+              ${opcoes}
+            </select>
+          </td>
+          <td>
+            <select class="gut-tendencia">
+              <option value="">-</option>
+              ${opcoes}
+            </select>
+          </td>
+          <td><span class="score-badge">0</span></td>
+          <td class="row-actions">
+            <button type="button" class="btn-icon btn-del" title="Remover">✕</button>
+          </td>
+        `;
+
+        const btnDel = tr.querySelector(".btn-del");
+        if (btnDel) {
+          btnDel.addEventListener("click", () => {
+            tr.remove();
+            atualizarResumoTipo(tipo);
+          });
+        }
+
+        tr.querySelectorAll("select, input").forEach(el => {
+          el.addEventListener("change", () => {
+            recalcularLinha(tr);
+            atualizarResumoTipo(tipo);
+          });
+        });
+
+        return tr;
+      }
+
+      function recalcularLinha(tr) {
+        const imp = Number(tr.querySelector(".gut-importancia")?.value || 0);
+        const int = Number(tr.querySelector(".gut-intensidade")?.value || 0);
+        const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
+        const score = imp * int * ten;
+        const badge = tr.querySelector(".score-badge");
+        if (badge) badge.textContent = score || 0;
+        return score || 0;
+      }
+
+      function addRow(tipo) {
+        const tbody = document.querySelector("#table-" + tipo + " tbody");
+        if (!tbody) return;
+        const tr = criarLinha(tipo);
+        tbody.appendChild(tr);
+      }
+
+      window.addRow = addRow;
+
+      function lerTabela(tipo) {
+        const tbody = document.querySelector("#table-" + tipo + " tbody");
+        if (!tbody) return [];
+        const linhas = Array.from(tbody.querySelectorAll("tr"));
+        return linhas.map(tr => {
+          const desc = (tr.querySelector("input[type='text']")?.value || "").trim();
+          const imp = Number(tr.querySelector(".gut-importancia")?.value || 0);
+          const int = Number(tr.querySelector(".gut-intensidade")?.value || 0);
+          const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
+          const score = imp * int * ten;
+          const badge = tr.querySelector(".score-badge");
+          if (badge) badge.textContent = score || 0;
+          return { descricao: desc, importancia: imp, intensidade: int, tendencia: ten, score };
+        }).filter(item =>
+          item.descricao !== "" || item.importancia || item.intensidade || item.tendencia
+        );
+      }
+
+      // NOVA VERSÃO: só desenha o radar quando a aba Resumo estiver visível
+      function atualizarRadar(force = false) {
+        const canvas = document.getElementById("radar-swot");
+        if (!canvas) return;
+
+        if (typeof Chart === "undefined") {
+          console.warn("Chart.js não carregado; o gráfico de radar ficará desabilitado.");
+          return;
+        }
+
+        const resumoTab = document.getElementById("tab-resumo");
+        const tabVisivel = resumoTab && resumoTab.classList.contains("active");
+
+        // se a aba Resumo não está visível, só continua se estiver em modo "forçado"
+        if (!tabVisivel && !force) {
+          return;
+        }
+
+        const scores = tipos.map(t => {
+          const span = document.querySelector(`[data-summary-score="${t}"]`);
+          return span ? Number(span.textContent) || 0 : 0;
+        });
+
+        const data = {
+          labels: tipos.map(t => labels[t]),
+          datasets: [
+            {
+              label: "Pontuação total GUT",
+              data: scores,
+              borderColor: "rgba(56,189,248,0.9)",
+              backgroundColor: "rgba(56,189,248,0.22)",
+              pointBackgroundColor: "#22c55e",
+              pointBorderColor: "#e5fef3",
+              pointRadius: 4,
+              borderWidth: 2
+            }
+          ]
+        };
+
+        const options = {
+          responsive: true,
+          scales: {
+            r: {
+              angleLines: { color: "rgba(148,163,184,0.35)" },
+              grid: { color: "rgba(30,64,175,0.45)" },
+              pointLabels: {
+                color: "#e2e8f0",
+                font: { size: 10 }
+              },
+              ticks: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                color: "#e2e8f0",
+                font: { size: 9 }
+              }
+            }
+          }
+        };
+
+        const ctx = canvas.getContext("2d");
+
+        if (radarChart) {
+          radarChart.data = data;
+          radarChart.options = options;
+          radarChart.update();
+        } else {
+          radarChart = new Chart(ctx, {
+            type: "radar",
+            data,
+            options
+          });
+        }
+      }
+
+      function atualizarResumoTipo(tipo) {
+        const dados = lerTabela(tipo);
+
+        const totalItensSpan = document.querySelector(`[data-summary-items="${tipo}"]`);
+        const totalScoreSpan = document.querySelector(`[data-summary-score="${tipo}"]`);
+
+        const totalItens = dados.length;
+        const totalScore = dados.reduce((acc, item) => acc + (item.score || 0), 0);
+
+        if (totalItensSpan) totalItensSpan.textContent = totalItens;
+        if (totalScoreSpan) totalScoreSpan.textContent = totalScore;
+
+        const lista = document.getElementById("lista-" + tipo);
+        const tag = document.getElementById("tag-" + tipo);
+
+        if (lista) {
+          lista.innerHTML = "";
+          const top5 = dados
+            .slice()
+            .sort((a, b) => (b.score || 0) - (a.score || 0))
+            .slice(0, 5);
+
+          top5.forEach(item => {
+            const li = document.createElement("li");
+            const label = item.descricao || "(sem descrição)";
+            li.textContent = `${label} – Pontuação: ${item.score || 0}`;
+            lista.appendChild(li);
+          });
+        }
+
+        if (tag) {
+          tag.textContent = `${totalItens} item${totalItens === 1 ? "" : "s"}`;
+        }
+
+        // Atualiza o radar sempre que um quadrante é recalculado
+        atualizarRadar();
+      }
+
+      function atualizarTodosResumos() {
+        tipos.forEach(t => atualizarResumoTipo(t));
+      }
+
+      function initExportacoes() {
+        const btnPDF = document.getElementById("btnExportPDF");
+        const btnExcel = document.getElementById("btnExportExcel");
+
+        if (btnPDF) {
+          btnPDF.addEventListener("click", () => {
+            try {
+              exportarPDF();
+            } catch (e) {
+              console.error(e);
+              alert("Ocorreu um erro ao gerar o PDF. Verifique se as bibliotecas jsPDF e autotable carregaram corretamente.");
+            }
+          });
+        }
+
+        if (btnExcel) {
+          btnExcel.addEventListener("click", () => {
+            try {
+              exportarExcel();
+            } catch (e) {
+              console.error(e);
+              alert("Ocorreu um erro ao gerar o Excel. Verifique se a biblioteca XLSX carregou corretamente.");
+            }
+          });
+        }
+      }
+
+      function exportarPDF() {
+        const jspdfNS = window.jspdf;
+        if (!jspdfNS || !jspdfNS.jsPDF) {
+          alert("Biblioteca jsPDF não encontrada.");
+          return;
+        }
+        const doc = new jspdfNS.jsPDF({ orientation: "landscape" });
+
+        tipos.forEach((tipo, index) => {
+          if (index > 0) doc.addPage();
+
+          const titulo = "Matriz SWOT + GUT – " + labels[tipo];
+          doc.setFontSize(14);
+          doc.text(titulo, 10, 10);
+
+          const dados = lerTabela(tipo);
+          const body = dados.map(d => [
+            d.descricao || "",
+            d.importancia || "",
+            d.intensidade || "",
+            d.tendencia || "",
+            d.score || 0
+          ]);
+
+          if (typeof doc.autoTable === "function") {
+            doc.autoTable({
+              startY: 16,
+              head: [["Descrição", "Importância", "Intensidade", "Tendência", "Pontuação"]],
+              body
+            });
+          } else {
+            let y = 20;
+            doc.setFontSize(10);
+            body.forEach(row => {
+              const linha = row.join(" | ");
+              doc.text(linha, 10, y);
+              y += 6;
+            });
+          }
+        });
+
+        doc.save("matriz-swot-gut.pdf");
+      }
+
+      function exportarExcel() {
+        if (typeof XLSX === "undefined") {
+          alert("Biblioteca XLSX não encontrada.");
+          return;
+        }
+
+        const wb = XLSX.utils.book_new();
+
+        tipos.forEach(tipo => {
+          const dados = lerTabela(tipo);
+          const linhas = dados.map(d => ({
+            Descrição: d.descricao || "",
+            Importância: d.importancia || "",
+            Intensidade: d.intensidade || "",
+            Tendência: d.tendencia || "",
+            Pontuação: d.score || 0
+          }));
+
+          const ws = XLSX.utils.json_to_sheet(linhas);
+          XLSX.utils.book_append_sheet(wb, ws, labels[tipo].substring(0, 31));
+        });
+
+        XLSX.writeFile(wb, "matriz-swot-gut.xlsx");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initTabs();
+        initExportacoes();
+
+        tipos.forEach(t => addRow(t));
+
+        atualizarTodosResumos();
+      });
+    })();
+  </script>
+</body>
+</html>
