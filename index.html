@@ -8,18 +8,18 @@
   <!-- Estilos -->
   <style>
     :root {
-      --bg: #0f172a;
-      --bg-elevated: #020617;
-      --accent-1: #22c55e;
-      --accent-2: #0ea5e9;
-      --accent-3: #f97316;
-      --accent-4: #ef4444;
+      --bg: #04141f;
+      --bg-elevated: #071d2c;
+      --accent-1: #00a19a; /* teal / ERO-style */
+      --accent-2: #f27f3d; /* cobre / laranja */
+      --accent-3: #ffd166; /* amarelo destaque */
+      --accent-4: #e63946; /* alerta / risco */
       --accent-muted: #64748b;
-      --border-subtle: #1e293b;
-      --text-main: #e2e8f0;
-      --text-soft: #94a3b8;
+      --border-subtle: #123047;
+      --text-main: #e5f4ff;
+      --text-soft: #9fb3c8;
       --card-radius: 14px;
-      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.68);
+      --shadow-soft: 0 22px 45px rgba(4, 20, 31, 0.85);
     }
 
     * {
@@ -30,7 +30,7 @@
     }
 
     body {
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #020617 100%);
+      background: radial-gradient(circle at top, #092338 0, var(--bg) 55%, var(--bg) 100%);
       color: var(--text-main);
       min-height: 100vh;
       padding: 24px;
@@ -49,7 +49,7 @@
       justify-content: space-between;
       gap: 16px;
       align-items: flex-start;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .title-block {
@@ -67,7 +67,7 @@
     }
 
     .title span.accent {
-      background: linear-gradient(120deg, #22c55e, #0ea5e9);
+      background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -102,15 +102,15 @@
       align-items: center;
       gap: 6px;
       color: var(--text-soft);
-      background: linear-gradient(120deg, rgba(15,23,42,0.95), rgba(15,23,42,0.7));
+      background: linear-gradient(120deg, rgba(7, 29, 44, 0.95), rgba(7, 29, 44, 0.8));
     }
 
     .pill-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #22c55e, #15803d);
-      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+      background: radial-gradient(circle at 30% 30%, var(--accent-1), #016d68);
+      box-shadow: 0 0 10px rgba(0, 161, 154, 0.8);
     }
 
     .btn {
@@ -125,27 +125,53 @@
       gap: 8px;
       transition: all 0.18s ease-out;
       white-space: nowrap;
+      position: relative;
+      overflow: hidden;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      color: #0f172a;
-      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 34px rgba(34, 197, 94, 0.45);
-    }
-
-    .btn-secondary {
-      background: rgba(15,23,42,0.8);
-      color: var(--text-main);
+    .btn-menu {
+      background: rgba(7, 29, 44, 0.98);
       border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--text-main);
+      box-shadow: 0 10px 25px rgba(4, 20, 31, 0.6);
     }
 
-    .btn-secondary:hover {
-      background: rgba(15,23,42,1);
+    .btn-menu::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+      z-index: -1;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, var(--accent-2), #ff9a5a);
+      border-color: rgba(242, 127, 61, 0.7);
+      color: #04141f;
+    }
+
+    .btn-pdf::before {
+      background: radial-gradient(circle at top, rgba(242, 127, 61, 0.45), transparent 60%);
+    }
+
+    .btn-excel {
+      background: linear-gradient(135deg, var(--accent-1), #5be7d0);
+      border-color: rgba(0, 161, 154, 0.8);
+      color: #04141f;
+    }
+
+    .btn-excel::before {
+      background: radial-gradient(circle at top, rgba(0, 161, 154, 0.4), transparent 60%);
+    }
+
+    .btn-menu:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(4, 20, 31, 0.85);
+    }
+
+    .btn-menu:hover::before {
+      opacity: 1;
     }
 
     .icon {
@@ -153,14 +179,71 @@
     }
 
     .main-card {
-      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%, #020617 100%);
+      background: radial-gradient(circle at top left, #0c2237 0, var(--bg-elevated) 55%, var(--bg-elevated) 100%);
       border-radius: 20px;
       border: 1px solid rgba(148,163,184,0.35);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 20px;
     }
 
-    /* Tabs */
+    .context-card {
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.98), var(--bg-elevated));
+      padding: 10px 12px 12px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .context-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      margin-top: 4px;
+    }
+
+    .context-field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 0.78rem;
+    }
+
+    .context-field label {
+      color: var(--text-soft);
+    }
+
+    .context-field input,
+    .context-field textarea {
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(7,29,44,0.96);
+      color: var(--text-main);
+      font-size: 0.78rem;
+      resize: vertical;
+    }
+
+    .context-field textarea {
+      min-height: 40px;
+    }
+
+    @media (max-width: 720px) {
+      .context-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .tab-header {
       display: flex;
       flex-wrap: wrap;
@@ -177,7 +260,7 @@
       font-weight: 600;
       border: 1px solid transparent;
       cursor: pointer;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(15,23,42,0.7));
+      background: radial-gradient(circle at top, rgba(7,29,44,0.9), rgba(7,29,44,0.7));
       color: var(--text-soft);
       display: flex;
       align-items: center;
@@ -201,8 +284,8 @@
     .tab-btn.active {
       color: #e5fef3;
       border-color: rgba(148,163,184,0.6);
-      background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(14,165,233,0.24));
-      box-shadow: 0 14px 34px rgba(15,23,42,0.9);
+      background: linear-gradient(135deg, rgba(0,161,154,0.16), rgba(242,127,61,0.24));
+      box-shadow: 0 14px 34px rgba(4,20,31,0.9);
     }
 
     .tab-btn .label {
@@ -210,7 +293,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* Summary chips */
     .summary-row {
       display: flex;
       flex-wrap: wrap;
@@ -222,7 +304,7 @@
       flex: 1 1 180px;
       border-radius: 14px;
       border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
       padding: 10px 12px;
       display: flex;
       flex-direction: column;
@@ -252,7 +334,6 @@
       color: var(--text-soft);
     }
 
-    /* Tab content / tabelas */
     .tab-content {
       display: none;
       margin-top: 10px;
@@ -266,7 +347,7 @@
       margin-top: 6px;
       border-radius: var(--card-radius);
       border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), #020617);
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.98), var(--bg-elevated));
       overflow: hidden;
     }
 
@@ -277,12 +358,12 @@
     }
 
     thead {
-      background: linear-gradient(135deg, rgba(148,163,184,0.15), rgba(15,23,42,0.9));
+      background: linear-gradient(135deg, rgba(148,163,184,0.15), rgba(7,29,44,0.9));
     }
 
     th, td {
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(15,23,42,0.9);
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(7,16,28,0.9);
       vertical-align: middle;
     }
 
@@ -296,11 +377,11 @@
     }
 
     tbody tr:nth-child(even) {
-      background: rgba(15,23,42,0.75);
+      background: rgba(7,29,44,0.75);
     }
 
     tbody tr:nth-child(odd) {
-      background: rgba(15,23,42,0.95);
+      background: rgba(7,29,44,0.95);
     }
 
     tbody tr:hover {
@@ -312,7 +393,7 @@
       padding: 4px 6px;
       border-radius: 6px;
       border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(15,23,42,0.9);
+      background: rgba(7,29,44,0.9);
       color: var(--text-main);
       font-size: 0.8rem;
     }
@@ -322,7 +403,7 @@
       padding: 4px 6px;
       border-radius: 999px;
       border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(15,23,42,0.96);
+      background: rgba(7,29,44,0.96);
       color: var(--text-main);
       font-size: 0.78rem;
     }
@@ -336,7 +417,7 @@
       border-radius: 999px;
       font-weight: 600;
       font-size: 0.8rem;
-      background: radial-gradient(circle at top, rgba(34,197,94,0.18), rgba(14,165,233,0.18));
+      background: radial-gradient(circle at top, rgba(0,161,154,0.18), rgba(242,127,61,0.18));
       border: 1px solid rgba(148, 163, 184, 0.5);
     }
 
@@ -350,7 +431,7 @@
       height: 24px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.45);
-      background: rgba(15,23,42,0.9);
+      background: rgba(7,29,44,0.9);
       color: var(--text-soft);
       font-size: 0.78rem;
       cursor: pointer;
@@ -361,7 +442,7 @@
     }
 
     .btn-icon:hover {
-      background: rgba(15,23,42,1);
+      background: rgba(7,29,44,1);
       color: #e2e8f0;
     }
 
@@ -370,8 +451,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 12px;
-      background: radial-gradient(circle at top left, rgba(15,23,42,1), rgba(15,23,42,0.85));
-      border-top: 1px solid rgba(15,23,42,0.9);
+      background: radial-gradient(circle at top left, rgba(7,29,44,1), rgba(7,29,44,0.85));
+      border-top: 1px solid rgba(7,16,28,0.9);
     }
 
     .table-footer-left {
@@ -399,14 +480,14 @@
       border-radius: 999px;
       padding: 3px 8px;
       border: 1px solid rgba(148,163,184,0.4);
-      background: rgba(15,23,42,0.9);
+      background: rgba(7,29,44,0.9);
     }
 
     .add-row-btn {
       font-size: 0.78rem;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
+      background: rgba(7,29,44,0.9);
       color: var(--text-main);
       border: 1px dashed rgba(148,163,184,0.7);
       display: inline-flex;
@@ -416,14 +497,13 @@
     }
 
     .add-row-btn:hover {
-      background: rgba(15,23,42,1);
+      background: rgba(7,29,44,1);
     }
 
-    /* Resumo */
     .resumo-radar-card {
       border-radius: 14px;
       border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
       padding: 10px 12px 16px;
       margin-top: 10px;
       display: flex;
@@ -450,7 +530,7 @@
     .resumo-card {
       border-radius: 14px;
       border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.82));
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
       padding: 10px 12px;
       display: flex;
       flex-direction: column;
@@ -485,7 +565,32 @@
       font-size: 0.78rem;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
+    }
+
+    .resumo-item-titulo {
+      font-size: 0.78rem;
+      margin-bottom: 3px;
+    }
+
+    .resumo-item-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
+    .resumo-item-form input,
+    .resumo-item-form select {
+      flex: 1 1 120px;
+      min-width: 120px;
+      padding: 3px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(7,29,44,0.96);
+      color: var(--text-main);
+      font-size: 0.72rem;
     }
 
     @media (max-width: 720px) {
@@ -500,7 +605,7 @@
     }
   </style>
 
-  <!-- Bibliotecas para PDF, Excel e Gráfico Radar (todas via cdnjs) -->
+  <!-- Bibliotecas para PDF, Excel e Radar -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -516,7 +621,8 @@
         </div>
         <div class="subtitle">
           Preencha forças, fraquezas, oportunidades e ameaças, atribua notas GUT
-          e veja o ranking automático com os TOP 5 na aba Resumo.
+          e veja o ranking automático com os TOP 5 na aba Resumo. Este painel é base
+          para construção do A3 estratégico.
         </div>
       </div>
       <div class="header-actions">
@@ -524,16 +630,55 @@
           <span class="pill-dot"></span>
           Modo interativo – ranking em tempo real
         </div>
-        <button class="btn btn-secondary" id="btnExportPDF">
+        <button class="btn btn-menu btn-pdf" id="btnExportPDF">
           <span class="icon">📄</span> Exportar PDF
         </button>
-        <button class="btn btn-primary" id="btnExportExcel">
+        <button class="btn btn-menu btn-excel" id="btnExportExcel">
           <span class="icon">📊</span> Exportar Excel
         </button>
       </div>
     </header>
 
     <main class="main-card">
+      <!-- Bloco de contexto A3 -->
+      <section class="context-card">
+        <div class="context-title">Contexto do A3 estratégico</div>
+        <div class="context-grid">
+          <div class="context-field">
+            <label for="ctx-tema">Nome do A3 / Tema</label>
+            <input id="ctx-tema" type="text" placeholder="Ex.: Aumento de produtividade na planta de Tucumã">
+          </div>
+          <div class="context-field">
+            <label for="ctx-objetivo">Objetivo estratégico</label>
+            <input id="ctx-objetivo" type="text" placeholder="Ex.: +10% de produção com segurança e custo controlado">
+          </div>
+          <div class="context-field">
+            <label for="ctx-escopo">Escopo / Fronteiras</label>
+            <textarea id="ctx-escopo" placeholder="O que está dentro e fora do escopo deste A3."></textarea>
+          </div>
+          <div class="context-field">
+            <label for="ctx-periodo">Período de análise</label>
+            <input id="ctx-periodo" type="text" placeholder="Ex.: 2025-2026, 2º semestre, etc.">
+          </div>
+          <div class="context-field">
+            <label for="ctx-area">Área / Unidade responsável</label>
+            <input id="ctx-area" type="text" placeholder="Ex.: Operações Tucumã, Manutenção, etc.">
+          </div>
+          <div class="context-field">
+            <label for="ctx-time">Time / Workshop</label>
+            <input id="ctx-time" type="text" placeholder="Ex.: nomes das pessoas / células envolvidas">
+          </div>
+          <div class="context-field">
+            <label for="ctx-facilitador">Facilitador</label>
+            <input id="ctx-facilitador" type="text" placeholder="Ex.: nome do facilitador do A3">
+          </div>
+          <div class="context-field">
+            <label for="ctx-data">Data da sessão</label>
+            <input id="ctx-data" type="date">
+          </div>
+        </div>
+      </section>
+
       <!-- Abas -->
       <div class="tab-header">
         <button class="tab-btn active" data-tab="forcas">
@@ -558,7 +703,7 @@
         </button>
       </div>
 
-      <!-- Chips de resumo rápido -->
+      <!-- Resumo rápido -->
       <div class="summary-row">
         <div class="summary-chip">
           <div class="summary-chip-header">
@@ -598,8 +743,6 @@
         </div>
       </div>
 
-      <!-- Conteúdo das abas -->
-
       <!-- Forças -->
       <section class="tab-content active" id="tab-forcas">
         <div class="gut-legend">
@@ -611,12 +754,14 @@
           <table id="table-forcas">
             <thead>
               <tr>
-                <th style="width:40%">Descrição</th>
-                <th style="width:15%">Importância</th>
-                <th style="width:15%">Intensidade</th>
-                <th style="width:15%">Tendência</th>
-                <th style="width:10%">Pontuação</th>
-                <th style="width:5%">⋯</th>
+                <th style="width:26%">Descrição</th>
+                <th style="width:14%">Categoria</th>
+                <th style="width:18%">Indicador</th>
+                <th style="width:10%">Importância</th>
+                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Tendência</th>
+                <th style="width:8%">Pontuação</th>
+                <th style="width:4%">⋯</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -643,12 +788,14 @@
           <table id="table-fraquezas">
             <thead>
               <tr>
-                <th style="width:40%">Descrição</th>
-                <th style="width:15%">Importância</th>
-                <th style="width:15%">Intensidade</th>
-                <th style="width:15%">Tendência</th>
-                <th style="width:10%">Pontuação</th>
-                <th style="width:5%">⋯</th>
+                <th style="width:26%">Descrição</th>
+                <th style="width:14%">Categoria</th>
+                <th style="width:18%">Indicador</th>
+                <th style="width:10%">Importância</th>
+                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Tendência</th>
+                <th style="width:8%">Pontuação</th>
+                <th style="width:4%">⋯</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -675,12 +822,14 @@
           <table id="table-oportunidades">
             <thead>
               <tr>
-                <th style="width:40%">Descrição</th>
-                <th style="width:15%">Importância</th>
-                <th style="width:15%">Intensidade</th>
-                <th style="width:15%">Tendência</th>
-                <th style="width:10%">Pontuação</th>
-                <th style="width:5%">⋯</th>
+                <th style="width:26%">Descrição</th>
+                <th style="width:14%">Categoria</th>
+                <th style="width:18%">Indicador</th>
+                <th style="width:10%">Importância</th>
+                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Tendência</th>
+                <th style="width:8%">Pontuação</th>
+                <th style="width:4%">⋯</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -707,12 +856,14 @@
           <table id="table-ameacas">
             <thead>
               <tr>
-                <th style="width:40%">Descrição</th>
-                <th style="width:15%">Importância</th>
-                <th style="width:15%">Intensidade</th>
-                <th style="width:15%">Tendência</th>
-                <th style="width:10%">Pontuação</th>
-                <th style="width:5%">⋯</th>
+                <th style="width:26%">Descrição</th>
+                <th style="width:14%">Categoria</th>
+                <th style="width:18%">Indicador</th>
+                <th style="width:10%">Importância</th>
+                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Tendência</th>
+                <th style="width:8%">Pontuação</th>
+                <th style="width:4%">⋯</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -730,7 +881,6 @@
 
       <!-- Resumo SWOT -->
       <section class="tab-content" id="tab-resumo">
-        <!-- Radar SWOT -->
         <div class="resumo-radar-card">
           <div class="resumo-card-header">
             <div class="resumo-card-title">Radar SWOT</div>
@@ -739,7 +889,6 @@
           <canvas id="radar-swot"></canvas>
         </div>
 
-        <!-- Quadrantes em 2x2 -->
         <div class="resumo-grid">
           <div class="resumo-card resumo-card-forcas">
             <div class="resumo-card-header">
@@ -777,7 +926,7 @@
     </main>
   </div>
 
-  <!-- Lógica JS -->
+  <!-- Lógica JS (sem localStorage) -->
   <script>
     (function () {
       const tipos = ["forcas", "fraquezas", "oportunidades", "ameacas"];
@@ -788,9 +937,30 @@
         ameacas: "Ameaças"
       };
 
+      const categoriasEstrategicas = [
+        "",
+        "Segurança",
+        "Qualidade",
+        "Custo",
+        "Entrega / Prazo",
+        "Produtividade / Operações",
+        "Pessoas & Cultura",
+        "Cliente / Mercado",
+        "ESG / Comunidade",
+        "Tecnologia & Dados",
+        "Outro"
+      ];
+
+      // Ações em memória (não persiste entre acessos)
+      let acoesSwot = {
+        forcas: {},
+        fraquezas: {},
+        oportunidades: {},
+        ameacas: {}
+      };
+
       let radarChart = null;
 
-      // NOVA VERSÃO: respeita a visibilidade da aba Resumo
       function initTabs() {
         const tabBtns = document.querySelectorAll(".tab-btn");
         const tabContents = document.querySelectorAll(".tab-content");
@@ -800,7 +970,6 @@
             const tab = btn.dataset.tab;
             if (!tab) return;
 
-            // troca de abas
             tabBtns.forEach(b => b.classList.remove("active"));
             tabContents.forEach(c => c.classList.remove("active"));
 
@@ -808,7 +977,6 @@
             const content = document.getElementById("tab-" + tab);
             if (content) content.classList.add("active");
 
-            // quando abrir a aba RESUMO, força o redesenho do radar
             if (tab === "resumo") {
               setTimeout(() => atualizarRadar(true), 0);
             }
@@ -816,36 +984,52 @@
         });
       }
 
+      function criarSelectCategoria() {
+        const sel = document.createElement("select");
+        sel.className = "swot-categoria";
+        categoriasEstrategicas.forEach(v => {
+          const opt = document.createElement("option");
+          opt.value = v;
+          opt.textContent = v === "" ? "-" : v;
+          sel.appendChild(opt);
+        });
+        return sel;
+      }
+
       function criarLinha(tipo) {
         const tr = document.createElement("tr");
         const placeholderPorTipo = {
-          forcas: "Descreva a força",
-          fraquezas: "Descreva a fraqueza",
+          forcas: "Descreva a força de forma observável",
+          fraquezas: "Descreva a fraqueza de forma observável",
           oportunidades: "Descreva a oportunidade",
           ameacas: "Descreva a ameaça"
         };
         const placeholder = placeholderPorTipo[tipo] || "Descreva o item";
 
-        const opcoes = [1, 2, 3, 4, 5].map(v => `<option value="${v}">${v}</option>`).join("");
+        const opcoesGut = [1, 2, 3, 4, 5]
+          .map(v => `<option value="${v}">${v}</option>`)
+          .join("");
 
         tr.innerHTML = `
-          <td><input type="text" placeholder="${placeholder}"></td>
+          <td><input type="text" class="swot-descricao" placeholder="${placeholder}"></td>
+          <td class="td-categoria"></td>
+          <td><input type="text" class="swot-indicador" placeholder="KPI / Indicador associado"></td>
           <td>
             <select class="gut-importancia">
               <option value="">-</option>
-              ${opcoes}
+              ${opcoesGut}
             </select>
           </td>
           <td>
             <select class="gut-intensidade">
               <option value="">-</option>
-              ${opcoes}
+              ${opcoesGut}
             </select>
           </td>
           <td>
             <select class="gut-tendencia">
               <option value="">-</option>
-              ${opcoes}
+              ${opcoesGut}
             </select>
           </td>
           <td><span class="score-badge">0</span></td>
@@ -853,6 +1037,12 @@
             <button type="button" class="btn-icon btn-del" title="Remover">✕</button>
           </td>
         `;
+
+        const tdCat = tr.querySelector(".td-categoria");
+        if (tdCat) {
+          const selCat = criarSelectCategoria();
+          tdCat.appendChild(selCat);
+        }
 
         const btnDel = tr.querySelector(".btn-del");
         if (btnDel) {
@@ -896,20 +1086,47 @@
         if (!tbody) return [];
         const linhas = Array.from(tbody.querySelectorAll("tr"));
         return linhas.map(tr => {
-          const desc = (tr.querySelector("input[type='text']")?.value || "").trim();
+          const desc = (tr.querySelector(".swot-descricao")?.value || "").trim();
+          const cat = tr.querySelector(".swot-categoria")?.value || "";
+          const indicador = (tr.querySelector(".swot-indicador")?.value || "").trim();
           const imp = Number(tr.querySelector(".gut-importancia")?.value || 0);
           const int = Number(tr.querySelector(".gut-intensidade")?.value || 0);
           const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
           const score = imp * int * ten;
           const badge = tr.querySelector(".score-badge");
           if (badge) badge.textContent = score || 0;
-          return { descricao: desc, importancia: imp, intensidade: int, tendencia: ten, score };
+          return {
+            descricao: desc,
+            categoria: cat,
+            indicador: indicador,
+            importancia: imp,
+            intensidade: int,
+            tendencia: ten,
+            score
+          };
         }).filter(item =>
-          item.descricao !== "" || item.importancia || item.intensidade || item.tendencia
+          item.descricao !== "" ||
+          item.categoria !== "" ||
+          item.indicador !== "" ||
+          item.importancia ||
+          item.intensidade ||
+          item.tendencia
         );
       }
 
-      // NOVA VERSÃO: só desenha o radar quando a aba Resumo estiver visível
+      function lerContexto() {
+        return {
+          tema: document.getElementById("ctx-tema")?.value || "",
+          objetivo: document.getElementById("ctx-objetivo")?.value || "",
+          escopo: document.getElementById("ctx-escopo")?.value || "",
+          periodo: document.getElementById("ctx-periodo")?.value || "",
+          area: document.getElementById("ctx-area")?.value || "",
+          time: document.getElementById("ctx-time")?.value || "",
+          facilitador: document.getElementById("ctx-facilitador")?.value || "",
+          data: document.getElementById("ctx-data")?.value || ""
+        };
+      }
+
       function atualizarRadar(force = false) {
         const canvas = document.getElementById("radar-swot");
         if (!canvas) return;
@@ -921,8 +1138,6 @@
 
         const resumoTab = document.getElementById("tab-resumo");
         const tabVisivel = resumoTab && resumoTab.classList.contains("active");
-
-        // se a aba Resumo não está visível, só continua se estiver em modo "forçado"
         if (!tabVisivel && !force) {
           return;
         }
@@ -940,7 +1155,7 @@
               data: scores,
               borderColor: "rgba(56,189,248,0.9)",
               backgroundColor: "rgba(56,189,248,0.22)",
-              pointBackgroundColor: "#22c55e",
+              pointBackgroundColor: "#00a19a",
               pointBorderColor: "#e5fef3",
               pointRadius: 4,
               borderWidth: 2
@@ -1013,8 +1228,71 @@
 
           top5.forEach(item => {
             const li = document.createElement("li");
+            li.className = "resumo-item";
+
             const label = item.descricao || "(sem descrição)";
-            li.textContent = `${label} – Pontuação: ${item.score || 0}`;
+            const chave = label;
+
+            if (!acoesSwot[tipo]) acoesSwot[tipo] = {};
+            const acaoSalva = acoesSwot[tipo][chave] || {
+              contramedida: "",
+              responsavel: "",
+              prazo: "",
+              status: ""
+            };
+
+            const tituloDiv = document.createElement("div");
+            tituloDiv.className = "resumo-item-titulo";
+            tituloDiv.textContent = `${label} – Pontuação: ${item.score || 0}`;
+
+            const formDiv = document.createElement("div");
+            formDiv.className = "resumo-item-form";
+
+            const inpContr = document.createElement("input");
+            inpContr.type = "text";
+            inpContr.placeholder = "Plano de Ação";
+            inpContr.value = acaoSalva.contramedida || "";
+
+            const inpResp = document.createElement("input");
+            inpResp.type = "text";
+            inpResp.placeholder = "Responsável";
+            inpResp.value = acaoSalva.responsavel || "";
+
+            const inpPrazo = document.createElement("input");
+            inpPrazo.type = "date";
+            inpPrazo.value = acaoSalva.prazo || "";
+
+            const selStatus = document.createElement("select");
+            const statusOpts = ["", "Backlog", "Planejado", "Em execução", "Concluído"];
+            statusOpts.forEach(v => {
+              const o = document.createElement("option");
+              o.value = v;
+              o.textContent = v === "" ? "Status" : v;
+              selStatus.appendChild(o);
+            });
+            selStatus.value = acaoSalva.status || "";
+
+            function salvarAcao() {
+              acoesSwot[tipo][chave] = {
+                contramedida: inpContr.value || "",
+                responsavel: inpResp.value || "",
+                prazo: inpPrazo.value || "",
+                status: selStatus.value || ""
+              };
+            }
+
+            [inpContr, inpResp, inpPrazo, selStatus].forEach(el => {
+              el.addEventListener("change", salvarAcao);
+            });
+
+            formDiv.appendChild(inpContr);
+            formDiv.appendChild(inpResp);
+            formDiv.appendChild(inpPrazo);
+            formDiv.appendChild(selStatus);
+
+            li.appendChild(tituloDiv);
+            li.appendChild(formDiv);
+
             lista.appendChild(li);
           });
         }
@@ -1023,7 +1301,6 @@
           tag.textContent = `${totalItens} item${totalItens === 1 ? "" : "s"}`;
         }
 
-        // Atualiza o radar sempre que um quadrante é recalculado
         atualizarRadar();
       }
 
@@ -1041,7 +1318,7 @@
               exportarPDF();
             } catch (e) {
               console.error(e);
-              alert("Ocorreu um erro ao gerar o PDF. Verifique se as bibliotecas jsPDF e autotable carregaram corretamente.");
+              alert("Ocorreu um erro ao gerar o PDF. Verifique jsPDF/autotable.");
             }
           });
         }
@@ -1052,7 +1329,7 @@
               exportarExcel();
             } catch (e) {
               console.error(e);
-              alert("Ocorreu um erro ao gerar o Excel. Verifique se a biblioteca XLSX carregou corretamente.");
+              alert("Ocorreu um erro ao gerar o Excel. Verifique a biblioteca XLSX.");
             }
           });
         }
@@ -1066,8 +1343,28 @@
         }
         const doc = new jspdfNS.jsPDF({ orientation: "landscape" });
 
-        tipos.forEach((tipo, index) => {
-          if (index > 0) doc.addPage();
+        const ctx = lerContexto();
+        doc.setFontSize(14);
+        doc.text("Contexto do A3 estratégico", 10, 10);
+        doc.setFontSize(10);
+        const linhasCtx = [
+          `Tema: ${ctx.tema || ""}`,
+          `Objetivo estratégico: ${ctx.objetivo || ""}`,
+          `Escopo / Fronteiras: ${ctx.escopo || ""}`,
+          `Período: ${ctx.periodo || ""}`,
+          `Área / Unidade: ${ctx.area || ""}`,
+          `Time / Workshop: ${ctx.time || ""}`,
+          `Facilitador: ${ctx.facilitador || ""}`,
+          `Data da sessão: ${ctx.data || ""}`
+        ];
+        let yCtx = 18;
+        linhasCtx.forEach(l => {
+          doc.text(l, 10, yCtx);
+          yCtx += 5;
+        });
+
+        tipos.forEach(tipo => {
+          doc.addPage();
 
           const titulo = "Matriz SWOT + GUT – " + labels[tipo];
           doc.setFontSize(14);
@@ -1076,6 +1373,8 @@
           const dados = lerTabela(tipo);
           const body = dados.map(d => [
             d.descricao || "",
+            d.categoria || "",
+            d.indicador || "",
             d.importancia || "",
             d.intensidade || "",
             d.tendencia || "",
@@ -1085,7 +1384,15 @@
           if (typeof doc.autoTable === "function") {
             doc.autoTable({
               startY: 16,
-              head: [["Descrição", "Importância", "Intensidade", "Tendência", "Pontuação"]],
+              head: [[
+                "Descrição",
+                "Categoria",
+                "Indicador",
+                "Importância",
+                "Intensidade",
+                "Tendência",
+                "Pontuação"
+              ]],
               body
             });
           } else {
@@ -1099,7 +1406,7 @@
           }
         });
 
-        doc.save("matriz-swot-gut.pdf");
+        doc.save("matriz-swot-gut-a3.pdf");
       }
 
       function exportarExcel() {
@@ -1110,10 +1417,27 @@
 
         const wb = XLSX.utils.book_new();
 
+        const ctx = lerContexto();
+        const wsCtxData = [
+          ["Campo", "Valor"],
+          ["Tema", ctx.tema || ""],
+          ["Objetivo estratégico", ctx.objetivo || ""],
+          ["Escopo / Fronteiras", ctx.escopo || ""],
+          ["Período", ctx.periodo || ""],
+          ["Área / Unidade", ctx.area || ""],
+          ["Time / Workshop", ctx.time || ""],
+          ["Facilitador", ctx.facilitador || ""],
+          ["Data da sessão", ctx.data || ""]
+        ];
+        const wsCtx = XLSX.utils.aoa_to_sheet(wsCtxData);
+        XLSX.utils.book_append_sheet(wb, wsCtx, "Contexto A3");
+
         tipos.forEach(tipo => {
           const dados = lerTabela(tipo);
           const linhas = dados.map(d => ({
             Descrição: d.descricao || "",
+            Categoria: d.categoria || "",
+            Indicador: d.indicador || "",
             Importância: d.importancia || "",
             Intensidade: d.intensidade || "",
             Tendência: d.tendencia || "",
@@ -1124,13 +1448,14 @@
           XLSX.utils.book_append_sheet(wb, ws, labels[tipo].substring(0, 31));
         });
 
-        XLSX.writeFile(wb, "matriz-swot-gut.xlsx");
+        XLSX.writeFile(wb, "matriz-swot-gut-a3.xlsx");
       }
 
       document.addEventListener("DOMContentLoaded", () => {
         initTabs();
         initExportacoes();
 
+        // Sempre começa com 1 linha em branco em cada tabela
         tipos.forEach(t => addRow(t));
 
         atualizarTodosResumos();
