@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -468,19 +469,29 @@
       color: #e5fef3;
     }
 
+    /* LEGENDA GUT – 3 LINHAS, VISUAL PREMIUM */
     .gut-legend {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 4px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-soft);
+      margin-bottom: 6px;
     }
 
     .gut-pill {
       border-radius: 999px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border: 1px solid rgba(148,163,184,0.4);
-      background: rgba(7,29,44,0.9);
+      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.85));
+      box-shadow: 0 8px 18px rgba(4,20,31,0.65);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gut-pill strong {
+      color: #e5f4ff;
     }
 
     .add-row-btn {
@@ -603,6 +614,14 @@
         grid-template-columns: 1fr;
       }
     }
+
+    footer {
+      margin-top: 12px;
+      text-align: right;
+      font-size: 0.6rem;
+      color: #64748b;
+      opacity: 0.9;
+    }
   </style>
 
   <!-- Bibliotecas para PDF, Excel e Radar -->
@@ -617,7 +636,7 @@
       <div class="title-block">
         <div class="title">
           Matriz <span class="accent">SWOT + GUT</span>
-          <span class="title-plan">– PLANO DE VOO ERO em Tucumã</span>
+          <span class="title-plan">– PLANO de VOO ERO em Tucumã</span>
         </div>
         <div class="subtitle">
           Preencha forças, fraquezas, oportunidades e ameaças, atribua notas GUT
@@ -746,9 +765,18 @@
       <!-- Forças -->
       <section class="tab-content active" id="tab-forcas">
         <div class="gut-legend">
-          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
-          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
-          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+          <span class="gut-pill">
+            <strong>Importância (G):</strong>
+            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
+          </span>
+          <span class="gut-pill">
+            <strong>Urgência (U):</strong>
+            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
+          </span>
+          <span class="gut-pill">
+            <strong>Tendência (T):</strong>
+            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+          </span>
         </div>
         <div class="table-wrapper">
           <table id="table-forcas">
@@ -758,7 +786,7 @@
                 <th style="width:14%">Categoria</th>
                 <th style="width:18%">Indicador</th>
                 <th style="width:10%">Importância</th>
-                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Urgência</th>
                 <th style="width:10%">Tendência</th>
                 <th style="width:8%">Pontuação</th>
                 <th style="width:4%">⋯</th>
@@ -780,9 +808,18 @@
       <!-- Fraquezas -->
       <section class="tab-content" id="tab-fraquezas">
         <div class="gut-legend">
-          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
-          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
-          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+          <span class="gut-pill">
+            <strong>Gravidade (G):</strong>
+            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
+          </span>
+          <span class="gut-pill">
+            <strong>Urgência (U):</strong>
+            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
+          </span>
+          <span class="gut-pill">
+            <strong>Tendência (T):</strong>
+            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+          </span>
         </div>
         <div class="table-wrapper">
           <table id="table-fraquezas">
@@ -791,8 +828,8 @@
                 <th style="width:26%">Descrição</th>
                 <th style="width:14%">Categoria</th>
                 <th style="width:18%">Indicador</th>
-                <th style="width:10%">Importância</th>
-                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Gravidade</th>
+                <th style="width:10%">Urgência</th>
                 <th style="width:10%">Tendência</th>
                 <th style="width:8%">Pontuação</th>
                 <th style="width:4%">⋯</th>
@@ -814,9 +851,18 @@
       <!-- Oportunidades -->
       <section class="tab-content" id="tab-oportunidades">
         <div class="gut-legend">
-          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
-          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
-          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+          <span class="gut-pill">
+            <strong>Importância (G):</strong>
+            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
+          </span>
+          <span class="gut-pill">
+            <strong>Urgência (U):</strong>
+            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
+          </span>
+          <span class="gut-pill">
+            <strong>Tendência (T):</strong>
+            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+          </span>
         </div>
         <div class="table-wrapper">
           <table id="table-oportunidades">
@@ -826,7 +872,7 @@
                 <th style="width:14%">Categoria</th>
                 <th style="width:18%">Indicador</th>
                 <th style="width:10%">Importância</th>
-                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Urgência</th>
                 <th style="width:10%">Tendência</th>
                 <th style="width:8%">Pontuação</th>
                 <th style="width:4%">⋯</th>
@@ -848,9 +894,18 @@
       <!-- Ameaças -->
       <section class="tab-content" id="tab-ameacas">
         <div class="gut-legend">
-          <span class="gut-pill"><strong>Importância:</strong> 1 Sem, 2 Pouco, 3 Importante, 4 Muito, 5 Totalmente</span>
-          <span class="gut-pill"><strong>Intensidade:</strong> 1 Muito fraca → 5 Muito forte</span>
-          <span class="gut-pill"><strong>Tendência:</strong> 1 Piora muito → 5 Melhora muito</span>
+          <span class="gut-pill">
+            <strong>Gravidade (G):</strong>
+            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
+          </span>
+          <span class="gut-pill">
+            <strong>Urgência (U):</strong>
+            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
+          </span>
+          <span class="gut-pill">
+            <strong>Tendência (T):</strong>
+            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+          </span>
         </div>
         <div class="table-wrapper">
           <table id="table-ameacas">
@@ -859,8 +914,8 @@
                 <th style="width:26%">Descrição</th>
                 <th style="width:14%">Categoria</th>
                 <th style="width:18%">Indicador</th>
-                <th style="width:10%">Importância</th>
-                <th style="width:10%">Intensidade</th>
+                <th style="width:10%">Gravidade</th>
+                <th style="width:10%">Urgência</th>
                 <th style="width:10%">Tendência</th>
                 <th style="width:8%">Pontuação</th>
                 <th style="width:4%">⋯</th>
@@ -925,6 +980,10 @@
       </section>
     </main>
   </div>
+
+  <footer>
+    Desenvolvido por Carlos Vial (carlos.vial@ero.com)
+  </footer>
 
   <!-- Lógica JS (sem localStorage) -->
   <script>
@@ -1065,7 +1124,7 @@
       function recalcularLinha(tr) {
         const imp = Number(tr.querySelector(".gut-importancia")?.value || 0);
         const int = Number(tr.querySelector(".gut-intensidade")?.value || 0);
-        const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
+               const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
         const score = imp * int * ten;
         const badge = tr.querySelector(".score-badge");
         if (badge) badge.textContent = score || 0;
@@ -1388,9 +1447,9 @@
                 "Descrição",
                 "Categoria",
                 "Indicador",
-                "Importância",
-                "Intensidade",
-                "Tendência",
+                "G (Imp./Grav.)",
+                "U (Urgência)",
+                "T (Tendência)",
                 "Pontuação"
               ]],
               body
@@ -1438,9 +1497,9 @@
             Descrição: d.descricao || "",
             Categoria: d.categoria || "",
             Indicador: d.indicador || "",
-            Importância: d.importancia || "",
-            Intensidade: d.intensidade || "",
-            Tendência: d.tendencia || "",
+            "G (Imp./Grav.)": d.importancia || "",
+            "U (Urgência)": d.intensidade || "",
+            "T (Tendência)": d.tendencia || "",
             Pontuação: d.score || 0
           }));
 
