@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -775,7 +774,7 @@
           </span>
           <span class="gut-pill">
             <strong>Tendência (T):</strong>
-            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+            1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito
           </span>
         </div>
         <div class="table-wrapper">
@@ -861,7 +860,7 @@
           </span>
           <span class="gut-pill">
             <strong>Tendência (T):</strong>
-            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
+            1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito
           </span>
         </div>
         <div class="table-wrapper">
@@ -996,18 +995,12 @@
         ameacas: "Ameaças"
       };
 
+      // CATEGORIAS RESUMIDAS
       const categoriasEstrategicas = [
         "",
-        "Segurança",
-        "Qualidade",
-        "Custo",
-        "Entrega / Prazo",
-        "Produtividade / Operações",
-        "Pessoas & Cultura",
-        "Cliente / Mercado",
-        "ESG / Comunidade",
-        "Tecnologia & Dados",
-        "Outro"
+        "Pessoas",
+        "Processos",
+        "Sistemas"
       ];
 
       // Ações em memória (não persiste entre acessos)
@@ -1124,7 +1117,7 @@
       function recalcularLinha(tr) {
         const imp = Number(tr.querySelector(".gut-importancia")?.value || 0);
         const int = Number(tr.querySelector(".gut-intensidade")?.value || 0);
-               const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
+        const ten = Number(tr.querySelector(".gut-tendencia")?.value || 0);
         const score = imp * int * ten;
         const badge = tr.querySelector(".score-badge");
         if (badge) badge.textContent = score || 0;
@@ -1232,9 +1225,7 @@
                 color: "#e2e8f0",
                 font: { size: 10 }
               },
-              ticks: {
-                display: false
-              }
+              ticks: { display: false }
             }
           },
           plugins: {
