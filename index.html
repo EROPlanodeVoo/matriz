@@ -943,6 +943,14 @@
           <canvas id="radar-swot"></canvas>
         </div>
 
+        <div class="resumo-radar-card">
+          <div class="resumo-card-header">
+            <div class="resumo-card-title">Radar por Categoria</div>
+            <div class="resumo-card-tag">Distribuição de ações: Pessoas, Processos, Sistemas</div>
+          </div>
+          <canvas id="radar-categorias"></canvas>
+        </div>
+
         <div class="resumo-grid">
           <div class="resumo-card resumo-card-forcas">
             <div class="resumo-card-header">
@@ -1012,6 +1020,7 @@
       };
 
       let radarChart = null;
+      let radarCategoriasChart = null;
 
       function initTabs() {
         const tabBtns = document.querySelectorAll(".tab-btn");
@@ -1180,11 +1189,12 @@
       }
 
       function atualizarRadar(force = false) {
-        const canvas = document.getElementById("radar-swot");
-        if (!canvas) return;
+        const canvasSwot = document.getElementById("radar-swot");
+        const canvasCat = document.getElementById("radar-categorias");
+        if (!canvasSwot || !canvasCat) return;
 
         if (typeof Chart === "undefined") {
-          console.warn("Chart.js não carregado; o gráfico de radar ficará desabilitado.");
+          console.warn("Chart.js não carregado; os gráficos de radar ficarão desabilitados.");
           return;
         }
 
@@ -1194,12 +1204,13 @@
           return;
         }
 
+        // Radar 1: pontuação total por quadrante
         const scores = tipos.map(t => {
           const span = document.querySelector(`[data-summary-score="${t}"]`);
           return span ? Number(span.textContent) || 0 : 0;
         });
 
-        const data = {
+        const dataSwot = {
           labels: tipos.map(t => labels[t]),
           datasets: [
             {
@@ -1215,7 +1226,7 @@
           ]
         };
 
-        const options = {
+        const optionsSwot = {
           responsive: true,
           scales: {
             r: {
@@ -1239,17 +1250,103 @@
           }
         };
 
-        const ctx = canvas.getContext("2d");
+        const ctxSwot = canvasSwot.getContext("2d");
 
         if (radarChart) {
-          radarChart.data = data;
-          radarChart.options = options;
+          radarChart.data = dataSwot;
+          radarChart.options = optionsSwot;
           radarChart.update();
         } else {
-          radarChart = new Chart(ctx, {
+          radarChart = new Chart(ctxSwot, {
             type: "radar",
-            data,
-            options
+            data: dataSwot,
+            options: optionsSwot
+          });
+        }
+
+        // Radar 2: quantidade de ações por categoria (Pessoas, Processos, Sistemas)
+        const categoriasBase = ["Pessoas", "Processos", "Sistemas"];
+        const contagemCategorias = {
+          Pessoas: 0,
+          Processos: 0,
+          Sistemas: 0
+        };
+
+        tipos.forEach(t => {
+          const dadosTipo = lerTabela(t);
+          dadosTipo.forEach(item => {
+            if (categoriasBase.includes(item.categoria)) {
+              contagemCategorias[item.categoria] += 1;
+            }
+          });
+        });
+
+        const dataCat = {
+          labels: categoriasBase,
+          datasets: [
+            {
+              label: "Quantidade de ações por categoria",
+              data: categoriasBase.map(c => contagemCategorias[c]),
+              borderColor: "rgba(244,114,182,0.9)",
+              backgroundColor: "rgba(244,114,182,0.18)",
+              pointBackgroundColor: "#f97316",
+              pointBorderColor: "#fefce8",
+              pointRadius: 4,
+              borderWidth: 2
+            }
+          ]
+        };
+
+        const optionsCat = {
+          responsive: true,
+          scales: {
+            r: {
+              angleLines: { color: "rgba(148,163,184,0.3)" },
+              grid: { color: "rgba(88,28,135,0.5)" },
+              pointLabels: {
+                color: "#e5e7eb",
+                font: { size: 10 }
+              },
+              ticks: {
+                display: true,
+                color: "#9ca3af",
+                backdropColor: "transparent",
+                stepSize: 1,
+                precision: 0
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                color: "#e5e7eb",
+                font: { size: 9 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) {
+                  const v = ctx.parsed.r || 0;
+                  const label = ctx.label || "";
+                  return `${label}: ${v} ação${v === 1 ? "" : "es"}`;
+                }
+              }
+            }
+          }
+        };
+
+        const ctxCat = canvasCat.getContext("2d");
+
+        if (radarCategoriasChart) {
+          radarCategoriasChart.data = dataCat;
+          radarCategoriasChart.options = optionsCat;
+          radarCategoriasChart.update();
+        } else {
+          radarCategoriasChart = new Chart(ctxCat, {
+            type: "radar",
+            data: dataCat,
+            options: optionsCat
           });
         }
       }
