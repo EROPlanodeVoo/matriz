@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -654,6 +655,10 @@
         <button class="btn btn-menu btn-excel" id="btnExportExcel">
           <span class="icon">📊</span> Exportar Excel
         </button>
+        <button class="btn btn-menu btn-excel" id="btnImportExcel">
+          <span class="icon">📥</span> Importar Excel
+        </button>
+        <input type="file" id="inputExcel" accept=".xlsx,.xls" style="display:none" />
       </div>
     </header>
 
@@ -992,7 +997,7 @@
     Desenvolvido por Carlos Vial (carlos.vial@ero.com)
   </footer>
 
-  <!-- Lógica JS (sem localStorage) -->
+  <!-- Lógica JS (com importação de Excel) -->
   <script>
     (function () {
       const tipos = ["forcas", "fraquezas", "oportunidades", "ameacas"];
@@ -1455,9 +1460,130 @@
         tipos.forEach(t => atualizarResumoTipo(t));
       }
 
+      function limparTabela(tipo) {
+        const tbody = document.querySelector("#table-" + tipo + " tbody");
+        if (tbody) tbody.innerHTML = "";
+      }
+
+      function preencherTabela(tipo, linhas) {
+        const tbody = document.querySelector("#table-" + tipo + " tbody");
+        if (!tbody) return;
+
+        limparTabela(tipo);
+
+        linhas.forEach(l => {
+          addRow(tipo);
+          const trs = tbody.querySelectorAll("tr");
+          const tr = trs[trs.length - 1];
+
+          tr.querySelector(".swot-descricao").value = l["Descrição"] || "";
+          tr.querySelector(".swot-categoria").value = l["Categoria"] || "";
+          tr.querySelector(".swot-indicador").value = l["Indicador"] || "";
+
+          const g = l["G (Imp./Grav.)"] || "";
+          const u = l["U (Urgência)"] || "";
+          const t = l["T (Tendência)"] || "";
+
+          tr.querySelector(".gut-importancia").value = g;
+          tr.querySelector(".gut-intensidade").value = u;
+          tr.querySelector(".gut-tendencia").value = t;
+
+          recalcularLinha(tr);
+        });
+
+        atualizarResumoTipo(tipo);
+      }
+
+      function preencherContextoDoExcel(linhasCtx) {
+        // Espera formato: [ ["Campo","Valor"], [...], ... ]
+        const mapa = {};
+        linhasCtx.forEach((row, idx) => {
+          if (idx === 0) return; // cabeçalho
+          const campo = row[0];
+          const valor = row[1];
+          if (!campo) return;
+          mapa[campo] = valor || "";
+        });
+
+        const m = (nome) => mapa[nome] || "";
+
+        const tema = document.getElementById("ctx-tema");
+        const objetivo = document.getElementById("ctx-objetivo");
+        const escopo = document.getElementById("ctx-escopo");
+        const periodo = document.getElementById("ctx-periodo");
+        const area = document.getElementById("ctx-area");
+        const time = document.getElementById("ctx-time");
+        const facilitador = document.getElementById("ctx-facilitador");
+        const data = document.getElementById("ctx-data");
+
+        if (tema) tema.value = m("Tema");
+        if (objetivo) objetivo.value = m("Objetivo estratégico");
+        if (escopo) escopo.value = m("Escopo / Fronteiras");
+        if (periodo) periodo.value = m("Período");
+        if (area) area.value = m("Área / Unidade");
+        if (time) time.value = m("Time / Workshop");
+        if (facilitador) facilitador.value = m("Facilitador");
+        if (data) data.value = m("Data da sessão");
+      }
+
+      function importarExcel(file) {
+        if (typeof XLSX === "undefined") {
+          alert("Biblioteca XLSX não encontrada.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const data = new Uint8Array(e.target.result);
+            const wb = XLSX.read(data, { type: "array" });
+
+            // 1) Contexto A3
+            const wsCtx = wb.Sheets["Contexto A3"];
+            if (wsCtx) {
+              const linhasCtx = XLSX.utils.sheet_to_json(wsCtx, { header: 1, defval: "" });
+              preencherContextoDoExcel(linhasCtx);
+            }
+
+            // 2) Quadrantes SWOT – planilhas "Forças", "Fraquezas", "Oportunidades", "Ameaças"
+            const mapeamentoSheetPorTipo = {
+              forcas: "Forças",
+              fraquezas: "Fraquezas",
+              oportunidades: "Oportunidades",
+              ameacas: "Ameaças"
+            };
+
+            tipos.forEach(tipo => {
+              const sheetName = mapeamentoSheetPorTipo[tipo];
+              const ws = wb.Sheets[sheetName];
+              if (!ws) {
+                limparTabela(tipo);
+                addRow(tipo);
+                atualizarResumoTipo(tipo);
+                return;
+              }
+
+              const linhas = XLSX.utils.sheet_to_json(ws, { defval: "" });
+              preencherTabela(tipo, linhas);
+            });
+
+            atualizarTodosResumos();
+            atualizarRadar(true);
+            alert("Excel importado com sucesso. A matriz foi preenchida a partir do arquivo.");
+          } catch (err) {
+            console.error(err);
+            alert("Erro ao importar o Excel. Verifique se o arquivo segue o modelo gerado pela própria ferramenta.");
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+
       function initExportacoes() {
         const btnPDF = document.getElementById("btnExportPDF");
         const btnExcel = document.getElementById("btnExportExcel");
+        const btnImportExcel = document.getElementById("btnImportExcel");
+        const inputExcel = document.getElementById("inputExcel");
 
         if (btnPDF) {
           btnPDF.addEventListener("click", () => {
@@ -1478,6 +1604,19 @@
               console.error(e);
               alert("Ocorreu um erro ao gerar o Excel. Verifique a biblioteca XLSX.");
             }
+          });
+        }
+
+        if (btnImportExcel && inputExcel) {
+          btnImportExcel.addEventListener("click", () => {
+            inputExcel.value = "";
+            inputExcel.click();
+          });
+
+          inputExcel.addEventListener("change", (ev) => {
+            const file = ev.target.files && ev.target.files[0];
+            if (!file) return;
+            importarExcel(file);
           });
         }
       }
