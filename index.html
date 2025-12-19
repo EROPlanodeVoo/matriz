@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,19 +8,26 @@
   <!-- Estilos -->
   <style>
     :root {
-      /* Tema claro para telão */
+      /* PALETA DO USUÁRIO + fundo branco */
       --bg: #ffffff;
-      --bg-elevated: #f9fafb;
-      --accent-1: #0f766e;  /* teal */
-      --accent-2: #b45309;  /* cobre / laranja */
-      --accent-3: #f59e0b;  /* amarelo */
-      --accent-4: #b91c1c;  /* vermelho alerta */
-      --accent-muted: #6b7280;
+      --bg-elevated: #f5f5f5;
+
+      --teal-dark: #004a4a;   /* R:0 G:74 B:74 */
+      --teal-main: #008080;   /* R:0 G:128 B:128 */
+      --teal-soft: #c7e5e4;   /* R:199 G:229 B:228 */
+      --charcoal: #5c5d54;    /* R:92 G:93 B:84 */
+      --gray-mid: #a7a9ac;    /* R:167 G:169 B:172 */
+
+      --accent-1: var(--teal-main);
+      --accent-2: var(--teal-dark);
+      --accent-3: var(--teal-soft);
+      --accent-4: #b91c1c;
+
       --border-subtle: #d1d5db;
       --text-main: #111827;
       --text-soft: #4b5563;
       --card-radius: 14px;
-      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.16);
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.12);
     }
 
     * {
@@ -32,11 +38,11 @@
     }
 
     html, body {
-      font-size: 18px; /* base maior para telão */
+      font-size: 18px;
     }
 
     body {
-      background: #ffffff;
+      background: var(--bg);
       color: var(--text-main);
       min-height: 100vh;
       padding: 24px;
@@ -74,7 +80,7 @@
     }
 
     .title span.accent {
-      background: linear-gradient(120deg, #0ea5e9, #22c55e, #f97316);
+      background: linear-gradient(120deg, var(--teal-dark), var(--teal-main));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -83,7 +89,7 @@
     .title-plan {
       font-size: 1.1rem;
       font-weight: 600;
-      color: var(--accent-2);
+      color: var(--charcoal);
     }
 
     .subtitle {
@@ -110,15 +116,15 @@
       align-items: center;
       gap: 6px;
       color: var(--text-soft);
-      background: radial-gradient(circle at top left, #e0f2fe, #f4f4ff);
+      background: var(--teal-soft);
     }
 
     .pill-dot {
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a);
-      box-shadow: 0 0 8px rgba(22, 163, 74, 0.8);
+      background: radial-gradient(circle at 30% 30%, var(--teal-main), var(--teal-dark));
+      box-shadow: 0 0 8px rgba(0, 128, 128, 0.8);
     }
 
     .btn {
@@ -138,10 +144,10 @@
     }
 
     .btn-menu {
-      background: #111827;
-      border: 1px solid #0f172a;
+      background: var(--charcoal);
+      border: 1px solid #3f3f3a;
       color: #f9fafb;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
 
     .btn-menu::before {
@@ -164,18 +170,18 @@
     }
 
     .btn-excel {
-      background: linear-gradient(135deg, #22c55e, #15803d);
-      border-color: rgba(21, 128, 61, 0.8);
+      background: linear-gradient(135deg, var(--teal-main), var(--teal-dark));
+      border-color: rgba(0, 74, 74, 0.8);
       color: #f9fafb;
     }
 
     .btn-excel::before {
-      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.4), transparent 60%);
+      background: radial-gradient(circle at top, rgba(0, 128, 128, 0.35), transparent 60%);
     }
 
     .btn-menu:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.55);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
     }
 
     .btn-menu:hover::before {
@@ -187,13 +193,14 @@
     }
 
     .main-card {
-      background: radial-gradient(circle at top left, #eef2ff, #f9fafb 35%, #ffffff 80%);
+      background: radial-gradient(circle at top left, #f3f4f6, #ffffff 60%);
       border-radius: 24px;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 20px;
     }
 
+    /* CONTEXTO A3 (resumo de sessão) */
     .context-card {
       border-radius: 16px;
       border: 1px solid #e5e7eb;
@@ -203,26 +210,14 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .context-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top left, rgba(59,130,246,0.06), transparent 55%);
-      pointer-events: none;
     }
 
     .context-title {
       font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--text-soft);
+      color: var(--charcoal);
       font-weight: 600;
-      position: relative;
-      z-index: 1;
     }
 
     .context-grid {
@@ -230,8 +225,6 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px 14px;
       margin-top: 4px;
-      position: relative;
-      z-index: 1;
     }
 
     .context-field {
@@ -267,6 +260,7 @@
       }
     }
 
+    /* TABS */
     .tab-header {
       display: flex;
       flex-wrap: wrap;
@@ -299,18 +293,19 @@
       border-radius: 999px;
     }
 
-    .tab-btn[data-tab="forcas"] span.dot { background: var(--accent-1); }
+    .tab-btn[data-tab="forcas"] span.dot { background: var(--teal-main); }
     .tab-btn[data-tab="fraquezas"] span.dot { background: var(--accent-4); }
-    .tab-btn[data-tab="oportunidades"] span.dot { background: var(--accent-2); }
-    .tab-btn[data-tab="ameacas"] span.dot { background: #7c3aed; }
-    .tab-btn[data-tab="resumo"] span.dot { background: var(--accent-muted); }
-    .tab-btn[data-tab="painel-top5"] span.dot { background: #0ea5e9; }
+    .tab-btn[data-tab="oportunidades"] span.dot { background: var(--teal-dark); }
+    .tab-btn[data-tab="ameacas"] span.dot { background: var(--gray-mid); }
+    .tab-btn[data-tab="a3-estrategico"] span.dot { background: var(--teal-soft); }
+    .tab-btn[data-tab="resumo"] span.dot { background: var(--charcoal); }
+    .tab-btn[data-tab="painel-top5"] span.dot { background: #9ca3af; }
 
     .tab-btn.active {
       color: #ffffff;
       border-color: transparent;
-      background: linear-gradient(135deg, #0ea5e9, #6366f1);
-      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.55);
+      background: linear-gradient(135deg, var(--teal-main), var(--teal-dark));
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
     }
 
     .tab-btn .label {
@@ -318,6 +313,16 @@
       letter-spacing: 0.08em;
     }
 
+    .tab-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* RESUMO RÁPIDO */
     .summary-row {
       display: flex;
       flex-wrap: wrap;
@@ -329,7 +334,7 @@
       flex: 1 1 200px;
       border-radius: 14px;
       border: 1px solid #e5e7eb;
-      background: linear-gradient(135deg, #ffffff, #f3f4ff);
+      background: linear-gradient(135deg, #ffffff, #f3f4f6);
       padding: 10px 12px;
       display: flex;
       flex-direction: column;
@@ -360,15 +365,7 @@
       color: var(--text-soft);
     }
 
-    .tab-content {
-      display: none;
-      margin-top: 10px;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
+    /* TABELAS SWOT */
     .table-wrapper {
       margin-top: 6px;
       border-radius: var(--card-radius);
@@ -384,7 +381,7 @@
     }
 
     thead {
-      background: linear-gradient(135deg, #e5e7eb, #e0f2fe);
+      background: linear-gradient(135deg, #e5e7eb, #cfd8dc);
     }
 
     th, td {
@@ -411,7 +408,7 @@
     }
 
     tbody tr:hover {
-      background: #e0f2fe;
+      background: #e5eef0;
     }
 
     input[type="text"] {
@@ -443,9 +440,9 @@
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.95rem;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      color: #111827;
+      background: #e0f2f1;
+      border: 1px solid #9ac9c6;
+      color: var(--teal-dark);
     }
 
     .row-actions {
@@ -492,10 +489,10 @@
 
     .table-footer-highlight {
       font-weight: 600;
-      color: #065f46;
+      color: var(--teal-dark);
     }
 
-    /* LEGENDA GUT – fontes maiores */
+    /* LEGENDA GUT */
     .gut-legend {
       display: flex;
       flex-direction: column;
@@ -509,8 +506,8 @@
       border-radius: 999px;
       padding: 6px 12px;
       border: 1px solid #d1d5db;
-      background: linear-gradient(135deg, #f9fafb, #eff6ff);
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      background: #f5f5f5;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -537,6 +534,7 @@
       background: #d1d5db;
     }
 
+    /* RESUMO SWOT (radar + listas) */
     .resumo-radar-card {
       border-radius: 14px;
       border: 1px solid #e5e7eb;
@@ -631,7 +629,7 @@
       font-size: 0.9rem;
     }
 
-    /* PAINEL TOP 5 – NOVA ABA VISUAL */
+    /* PAINEL TOP 5 */
     .top5-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -648,35 +646,27 @@
       color: #0f172a;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
-    }
-
-    .top5-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      opacity: 0.9;
-      pointer-events: none;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
     }
 
     .top5-forcas {
-      border: 1px solid #bbf7d0;
-      background: radial-gradient(circle at top left, #bbf7d0, #ecfdf5 40%, #ffffff 100%);
+      border: 1px solid #9ac9c6;
+      background: radial-gradient(circle at top left, var(--teal-soft), #ffffff 60%);
     }
 
     .top5-fraquezas {
-      border: 1px solid #fecaca;
-      background: radial-gradient(circle at top left, #fecaca, #fef2f2 40%, #ffffff 100%);
+      border: 1px solid #fca5a5;
+      background: radial-gradient(circle at top left, #fecaca, #ffffff 60%);
     }
 
     .top5-oportunidades {
-      border: 1px solid #fde68a;
-      background: radial-gradient(circle at top left, #fde68a, #fffbeb 40%, #ffffff 100%);
+      border: 1px solid #fed7aa;
+      background: radial-gradient(circle at top left, #fed7aa, #ffffff 60%);
     }
 
     .top5-ameacas {
-      border: 1px solid #bfdbfe;
-      background: radial-gradient(circle at top left, #bfdbfe, #eff6ff 40%, #ffffff 100%);
+      border: 1px solid #cbd5e1;
+      background: radial-gradient(circle at top left, #cbd5e1, #ffffff 60%);
     }
 
     .top5-header {
@@ -694,28 +684,14 @@
       border-radius: 999px;
       font-size: 0.75rem;
       font-weight: 600;
-      background: rgba(15,23,42,0.06);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.05);
     }
 
-    .top5-chip-forcas {
-      background: rgba(22,163,74,0.1);
-      color: #166534;
-    }
-
-    .top5-chip-fraquezas {
-      background: rgba(239,68,68,0.1);
-      color: #b91c1c;
-    }
-
-    .top5-chip-oportunidades {
-      background: rgba(245,158,11,0.1);
-      color: #92400e;
-    }
-
-    .top5-chip-ameacas {
-      background: rgba(59,130,246,0.1);
-      color: #1d4ed8;
-    }
+    .top5-chip-forcas { color: var(--teal-dark); }
+    .top5-chip-fraquezas { color: #7f1d1d; }
+    .top5-chip-oportunidades { color: #92400e; }
+    .top5-chip-ameacas { color: #111827; }
 
     .top5-subtitle {
       font-size: 0.8rem;
@@ -740,7 +716,7 @@
       gap: 6px;
       padding: 4px 6px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.75);
     }
 
     .top5-item-text {
@@ -754,6 +730,8 @@
       font-size: 0.8rem;
       font-weight: 700;
       text-align: center;
+      background: #e5e7eb;
+      color: #111827;
     }
 
     .top5-forcas .top5-score-pill {
@@ -772,11 +750,177 @@
     }
 
     .top5-ameacas .top5-score-pill {
-      background: #bfdbfe;
-      color: #1d4ed8;
+      background: #cbd5e1;
+      color: #111827;
+    }
+
+    /* ABA A3 ESTRATÉGICO – VISÃO PMO */
+    .a3-wrapper {
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 14px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .a3-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .a3-titleline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .a3-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal-dark);
+    }
+
+    .a3-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .a3-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .a3-label-inline {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    .a3-select {
+      min-width: 220px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .a3-status-gerencia {
+      font-size: 0.8rem;
+      color: var(--gray-mid);
+      margin-top: 2px;
+    }
+
+    /* GRID 6 BLOCOS */
+    .a3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px 14px;
+      margin-top: 10px;
+    }
+
+    .a3-block {
+      border-radius: 14px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .a3-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .a3-block-mainlabel {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .a3-block-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .a3-add-line {
+      border-radius: 999px;
+      border: 1px dashed #9ca3af;
+      background: #e5e7eb;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .a3-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .a3-line {
+      display: flex;
+      gap: 4px;
+      align-items: stretch;
+    }
+
+    .a3-line textarea {
+      flex: 1 1 auto;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 6px 8px;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      min-height: 44px;
+      resize: vertical;
+    }
+
+    .a3-remove-line {
+      align-self: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      color: #6b7280;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .a3-remove-line:hover {
+      background: #fee2e2;
+      color: #b91c1c;
     }
 
     @media (max-width: 1024px) {
+      .a3-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .top5-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -794,20 +938,23 @@
       .top5-grid {
         grid-template-columns: 1fr;
       }
+      .a3-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     footer {
       margin-top: 12px;
       text-align: right;
       font-size: 0.8rem;
-      color: #6b7280;
+      color: var(--gray-mid);
       opacity: 0.9;
     }
 
-    /* Ajustes específicos para telão 512x896 (layout estreito) */
+    /* Telão 512x896 */
     @media (max-width: 896px) {
       html, body {
-        font-size: 20px; /* letras ainda maiores no telão */
+        font-size: 20px;
       }
 
       body {
@@ -857,6 +1004,10 @@
       .top5-grid {
         grid-template-columns: 1fr;
       }
+
+      .a3-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
@@ -899,9 +1050,9 @@
     </header>
 
     <main class="main-card">
-      <!-- Bloco de contexto A3 -->
+      <!-- CONTEXTO sessão -->
       <section class="context-card">
-        <div class="context-title">Contexto do A3 estratégico</div>
+        <div class="context-title">Contexto da sessão / Workshop</div>
         <div class="context-grid">
           <div class="context-field">
             <label for="ctx-tema">Nome do A3 / Tema</label>
@@ -956,6 +1107,10 @@
           <span class="dot"></span>
           <span class="label">Ameaças</span>
         </button>
+        <button class="tab-btn" data-tab="a3-estrategico">
+          <span class="dot"></span>
+          <span class="label">A3 Estratégico</span>
+        </button>
         <button class="tab-btn" data-tab="resumo">
           <span class="dot"></span>
           <span class="label">Resumo SWOT</span>
@@ -966,7 +1121,7 @@
         </button>
       </div>
 
-      <!-- Resumo rápido -->
+      <!-- RESUMO rápido -->
       <div class="summary-row">
         <div class="summary-chip">
           <div class="summary-chip-header">
@@ -1009,32 +1164,23 @@
       <!-- Forças -->
       <section class="tab-content active" id="tab-forcas">
         <div class="gut-legend">
-          <span class="gut-pill">
-            <strong>Importância (G):</strong>
-            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
-          </span>
-          <span class="gut-pill">
-            <strong>Urgência (U):</strong>
-            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
-          </span>
-          <span class="gut-pill">
-            <strong>Tendência (T):</strong>
-            1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito
-          </span>
+          <span class="gut-pill"><strong>Importância (G):</strong> 1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica</span>
+          <span class="gut-pill"><strong>Urgência (U):</strong> 1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato</span>
+          <span class="gut-pill"><strong>Tendência (T):</strong> 1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito</span>
         </div>
         <div class="table-wrapper">
           <table id="table-forcas">
             <thead>
-              <tr>
-                <th style="width:26%">Descrição</th>
-                <th style="width:14%">Categoria</th>
-                <th style="width:18%">Indicador</th>
-                <th style="width:10%">Importância</th>
-                <th style="width:10%">Urgência</th>
-                <th style="width:10%">Tendência</th>
-                <th style="width:8%">Pontuação</th>
-                <th style="width:4%">⋯</th>
-              </tr>
+            <tr>
+              <th style="width:26%">Descrição</th>
+              <th style="width:14%">Categoria</th>
+              <th style="width:18%">Indicador</th>
+              <th style="width:10%">Importância</th>
+              <th style="width:10%">Urgência</th>
+              <th style="width:10%">Tendência</th>
+              <th style="width:8%">Pontuação</th>
+              <th style="width:4%">⋯</th>
+            </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -1052,32 +1198,23 @@
       <!-- Fraquezas -->
       <section class="tab-content" id="tab-fraquezas">
         <div class="gut-legend">
-          <span class="gut-pill">
-            <strong>Gravidade (G):</strong>
-            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
-          </span>
-          <span class="gut-pill">
-            <strong>Urgência (U):</strong>
-            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
-          </span>
-          <span class="gut-pill">
-            <strong>Tendência (T):</strong>
-            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
-          </span>
+          <span class="gut-pill"><strong>Gravidade (G):</strong> 1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica</span>
+          <span class="gut-pill"><strong>Urgência (U):</strong> 1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato</span>
+          <span class="gut-pill"><strong>Tendência (T):</strong> 1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito</span>
         </div>
         <div class="table-wrapper">
           <table id="table-fraquezas">
             <thead>
-              <tr>
-                <th style="width:26%">Descrição</th>
-                <th style="width:14%">Categoria</th>
-                <th style="width:18%">Indicador</th>
-                <th style="width:10%">Gravidade</th>
-                <th style="width:10%">Urgência</th>
-                <th style="width:10%">Tendência</th>
-                <th style="width:8%">Pontuação</th>
-                <th style="width:4%">⋯</th>
-              </tr>
+            <tr>
+              <th style="width:26%">Descrição</th>
+              <th style="width:14%">Categoria</th>
+              <th style="width:18%">Indicador</th>
+              <th style="width:10%">Gravidade</th>
+              <th style="width:10%">Urgência</th>
+              <th style="width:10%">Tendência</th>
+              <th style="width:8%">Pontuação</th>
+              <th style="width:4%">⋯</th>
+            </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -1095,32 +1232,23 @@
       <!-- Oportunidades -->
       <section class="tab-content" id="tab-oportunidades">
         <div class="gut-legend">
-          <span class="gut-pill">
-            <strong>Importância (G):</strong>
-            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
-          </span>
-          <span class="gut-pill">
-            <strong>Urgência (U):</strong>
-            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
-          </span>
-          <span class="gut-pill">
-            <strong>Tendência (T):</strong>
-            1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito
-          </span>
+          <span class="gut-pill"><strong>Importância (G):</strong> 1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica</span>
+          <span class="gut-pill"><strong>Urgência (U):</strong> 1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato</span>
+          <span class="gut-pill"><strong>Tendência (T):</strong> 1 = piora muito, 2 = piora, 3 = estável, 4 = melhora, 5 = melhora muito</span>
         </div>
         <div class="table-wrapper">
           <table id="table-oportunidades">
             <thead>
-              <tr>
-                <th style="width:26%">Descrição</th>
-                <th style="width:14%">Categoria</th>
-                <th style="width:18%">Indicador</th>
-                <th style="width:10%">Importância</th>
-                <th style="width:10%">Urgência</th>
-                <th style="width:10%">Tendência</th>
-                <th style="width:8%">Pontuação</th>
-                <th style="width:4%">⋯</th>
-              </tr>
+            <tr>
+              <th style="width:26%">Descrição</th>
+              <th style="width:14%">Categoria</th>
+              <th style="width:18%">Indicador</th>
+              <th style="width:10%">Importância</th>
+              <th style="width:10%">Urgência</th>
+              <th style="width:10%">Tendência</th>
+              <th style="width:8%">Pontuação</th>
+              <th style="width:4%">⋯</th>
+            </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -1138,32 +1266,23 @@
       <!-- Ameaças -->
       <section class="tab-content" id="tab-ameacas">
         <div class="gut-legend">
-          <span class="gut-pill">
-            <strong>Gravidade (G):</strong>
-            1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica
-          </span>
-          <span class="gut-pill">
-            <strong>Urgência (U):</strong>
-            1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato
-          </span>
-          <span class="gut-pill">
-            <strong>Tendência (T):</strong>
-            1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito
-          </span>
+          <span class="gut-pill"><strong>Gravidade (G):</strong> 1 = irrelevante, 2 = baixa, 3 = moderada, 4 = alta, 5 = crítica</span>
+          <span class="gut-pill"><strong>Urgência (U):</strong> 1 = pode esperar, 2 = curto prazo, 3 = médio prazo, 4 = rápido, 5 = imediato</span>
+          <span class="gut-pill"><strong>Tendência (T):</strong> 1 = melhora muito, 2 = melhora, 3 = estável, 4 = piora, 5 = piora muito</span>
         </div>
         <div class="table-wrapper">
           <table id="table-ameacas">
             <thead>
-              <tr>
-                <th style="width:26%">Descrição</th>
-                <th style="width:14%">Categoria</th>
-                <th style="width:18%">Indicador</th>
-                <th style="width:10%">Gravidade</th>
-                <th style="width:10%">Urgência</th>
-                <th style="width:10%">Tendência</th>
-                <th style="width:8%">Pontuação</th>
-                <th style="width:4%">⋯</th>
-              </tr>
+            <tr>
+              <th style="width:26%">Descrição</th>
+              <th style="width:14%">Categoria</th>
+              <th style="width:18%">Indicador</th>
+              <th style="width:10%">Gravidade</th>
+              <th style="width:10%">Urgência</th>
+              <th style="width:10%">Tendência</th>
+              <th style="width:8%">Pontuação</th>
+              <th style="width:4%">⋯</th>
+            </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -1173,6 +1292,115 @@
             </div>
             <div class="table-footer-left">
               Total: <span class="table-footer-highlight" data-summary-items="ameacas">0</span> itens
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA A3 ESTRATÉGICO – VISÃO PMO -->
+      <section class="tab-content" id="tab-a3-estrategico">
+        <div class="a3-wrapper">
+          <div class="a3-header">
+            <div class="a3-titleline">
+              <div class="a3-title">A3 ESTRATÉGICO – VISÃO PMO</div>
+            </div>
+            <div class="a3-subtitle">
+              Seis blocos para consolidar o A3: contexto, situação atual, objetivos, situação futura, plano de ação/cronograma e indicadores de progresso.
+            </div>
+            <div class="a3-header-row">
+              <span class="a3-label-inline">Gerência responsável:</span>
+              <select id="a3-gerencia" class="a3-select">
+                <option value="">Selecionar gerência</option>
+                <option value="Operações">Operações</option>
+                <option value="Manutenção">Manutenção</option>
+                <option value="PCM">PCM</option>
+		<option value="DHO">DHO</option>
+                <option value="SSTMA">SSTMA</option>
+		<option value="Suprimentos">Suprimentos</option>
+		<option value="/Controladoria">Controladoria</option>
+		<option value="Geologia">Geologia</option>
+		<option value="Mina">Mina</option>
+		<option value="Filtragem">Filtragem</option>
+		<option value="Diretoria">Diretoria</option>
+		<option value="Projetos">Projetos</option>
+              </select>
+            </div>
+            <div class="a3-status-gerencia" id="a3-gerencia-status">
+              Nenhuma gerência selecionada.
+            </div>
+          </div>
+
+          <div class="a3-grid">
+            <!-- 1. CONTEXTO -->
+            <div class="a3-block" data-a3-bloco="1">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">1. CONTEXTO</div>
+                  <div class="a3-block-sub">Principais informações de cenário, escopo e motivação do A3.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
+            </div>
+
+            <!-- 2. SITUAÇÃO ATUAL -->
+            <div class="a3-block" data-a3-bloco="2">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">2. SITUAÇÃO ATUAL</div>
+                  <div class="a3-block-sub">Fatos, dor atual, evidências e indicadores da situação.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
+            </div>
+
+            <!-- 3. OBJETIVOS E METAS -->
+            <div class="a3-block" data-a3-bloco="3">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">3. OBJETIVOS E METAS</div>
+                  <div class="a3-block-sub">Resultados desejados, metas e critérios de sucesso.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
+            </div>
+
+            <!-- 4. SITUAÇÃO FUTURA -->
+            <div class="a3-block" data-a3-bloco="4">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">4. SITUAÇÃO FUTURA</div>
+                  <div class="a3-block-sub">Como deve ser o cenário após a execução do plano.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
+            </div>
+
+            <!-- 5. PLANO DE AÇÃO / CRONOGRAMA -->
+            <div class="a3-block" data-a3-bloco="5">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">5. PLANO DE AÇÃO / CRONOGRAMA</div>
+                  <div class="a3-block-sub">Principais marcos, entregas, responsáveis e prazos.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
+            </div>
+
+            <!-- 6. INDICADOR DE PROGRESSO -->
+            <div class="a3-block" data-a3-bloco="6">
+              <div class="a3-block-header">
+                <div>
+                  <div class="a3-block-mainlabel">6. INDICADOR DE PROGRESSO</div>
+                  <div class="a3-block-sub">KPIs e checkpoints para acompanhar a evolução do A3.</div>
+                </div>
+                <button type="button" class="a3-add-line">+ Linha</button>
+              </div>
+              <div class="a3-lines"></div>
             </div>
           </div>
         </div>
@@ -1231,7 +1459,7 @@
         </div>
       </section>
 
-      <!-- NOVA ABA: Painel TOP 5 visual por quadrante -->
+      <!-- Painel TOP 5 -->
       <section class="tab-content" id="tab-painel-top5">
         <div class="top5-grid">
           <div class="top5-card top5-forcas">
@@ -1278,7 +1506,7 @@
     Desenvolvido por Carlos Vial (carlos.vial@ero.com)
   </footer>
 
-  <!-- Lógica JS (com importação de Excel) -->
+  <!-- Lógica JS -->
   <script>
     (function () {
       const tipos = ["forcas", "fraquezas", "oportunidades", "ameacas"];
@@ -1289,15 +1517,8 @@
         ameacas: "Ameaças"
       };
 
-      // CATEGORIAS RESUMIDAS
-      const categoriasEstrategicas = [
-        "",
-        "Pessoas",
-        "Processos",
-        "Sistemas"
-      ];
+      const categoriasEstrategicas = ["", "Pessoas", "Processos", "Sistemas"];
 
-      // Ações em memória (não persiste entre acessos)
       let acoesSwot = {
         forcas: {},
         fraquezas: {},
@@ -1305,7 +1526,6 @@
         ameacas: {}
       };
 
-      // Cache de TOP 5 por quadrante para o painel visual
       let top5Cache = {
         forcas: [],
         fraquezas: [],
@@ -1316,6 +1536,7 @@
       let radarChart = null;
       let radarCategoriasChart = null;
 
+      /* TABS */
       function initTabs() {
         const tabBtns = document.querySelectorAll(".tab-btn");
         const tabContents = document.querySelectorAll(".tab-content");
@@ -1342,6 +1563,7 @@
         });
       }
 
+      /* SELECT categoria */
       function criarSelectCategoria() {
         const sel = document.createElement("select");
         sel.className = "swot-categoria";
@@ -1354,6 +1576,7 @@
         return sel;
       }
 
+      /* Linha SWOT */
       function criarLinha(tipo) {
         const tr = document.createElement("tr");
         const placeholderPorTipo = {
@@ -1453,15 +1676,7 @@
           const score = imp * int * ten;
           const badge = tr.querySelector(".score-badge");
           if (badge) badge.textContent = score || 0;
-          return {
-            descricao: desc,
-            categoria: cat,
-            indicador: indicador,
-            importancia: imp,
-            intensidade: int,
-            tendencia: ten,
-            score
-          };
+          return { descricao: desc, categoria: cat, indicador, importancia: imp, intensidade: int, tendencia: ten, score };
         }).filter(item =>
           item.descricao !== "" ||
           item.categoria !== "" ||
@@ -1485,6 +1700,7 @@
         };
       }
 
+      /* Radar SWOT */
       function atualizarRadar(force = false) {
         const canvasSwot = document.getElementById("radar-swot");
         const canvasCat = document.getElementById("radar-categorias");
@@ -1501,7 +1717,6 @@
           return;
         }
 
-        // Radar 1: pontuação total por quadrante
         const scores = tipos.map(t => {
           const span = document.querySelector(`[data-summary-score="${t}"]`);
           return span ? Number(span.textContent) || 0 : 0;
@@ -1513,9 +1728,9 @@
             {
               label: "Pontuação total GUT",
               data: scores,
-              borderColor: "rgba(37,99,235,0.9)",
-              backgroundColor: "rgba(59,130,246,0.18)",
-              pointBackgroundColor: "#1d4ed8",
+              borderColor: "rgba(0,128,128,0.85)",
+              backgroundColor: "rgba(0,128,128,0.18)",
+              pointBackgroundColor: "#004a4a",
               pointBorderColor: "#ffffff",
               pointRadius: 4,
               borderWidth: 2
@@ -1527,23 +1742,14 @@
           responsive: true,
           scales: {
             r: {
-              angleLines: { color: "rgba(156,163,175,0.6)" },
+              angleLines: { color: "rgba(148,163,184,0.6)" },
               grid: { color: "rgba(209,213,219,0.9)" },
-              pointLabels: {
-                color: "#111827",
-                font: { size: 11 }
-              },
+              pointLabels: { color: "#111827", font: { size: 11 } },
               ticks: { display: false }
             }
           },
           plugins: {
-            legend: {
-              display: true,
-              labels: {
-                color: "#111827",
-                font: { size: 10 }
-              }
-            }
+            legend: { display: true, labels: { color: "#111827", font: { size: 10 } } }
           }
         };
 
@@ -1554,20 +1760,11 @@
           radarChart.options = optionsSwot;
           radarChart.update();
         } else {
-          radarChart = new Chart(ctxSwot, {
-            type: "radar",
-            data: dataSwot,
-            options: optionsSwot
-          });
+          radarChart = new Chart(ctxSwot, { type: "radar", data: dataSwot, options: optionsSwot });
         }
 
-        // Radar 2: quantidade de ações por categoria (Pessoas, Processos, Sistemas)
         const categoriasBase = ["Pessoas", "Processos", "Sistemas"];
-        const contagemCategorias = {
-          Pessoas: 0,
-          Processos: 0,
-          Sistemas: 0
-        };
+        const contagemCategorias = { Pessoas: 0, Processos: 0, Sistemas: 0 };
 
         tipos.forEach(t => {
           const dadosTipo = lerTabela(t);
@@ -1584,9 +1781,9 @@
             {
               label: "Quantidade de ações por categoria",
               data: categoriasBase.map(c => contagemCategorias[c]),
-              borderColor: "rgba(217,70,239,0.9)",
-              backgroundColor: "rgba(244,114,182,0.18)",
-              pointBackgroundColor: "#db2777",
+              borderColor: "rgba(92,93,84,0.9)",
+              backgroundColor: "rgba(167,169,172,0.25)",
+              pointBackgroundColor: "#5c5d54",
               pointBorderColor: "#ffffff",
               pointRadius: 4,
               borderWidth: 2
@@ -1598,12 +1795,9 @@
           responsive: true,
           scales: {
             r: {
-              angleLines: { color: "rgba(156,163,175,0.6)" },
+              angleLines: { color: "rgba(148,163,184,0.6)" },
               grid: { color: "rgba(209,213,219,0.9)" },
-              pointLabels: {
-                color: "#111827",
-                font: { size: 11 }
-              },
+              pointLabels: { color: "#111827", font: { size: 11 } },
               ticks: {
                 display: true,
                 color: "#4b5563",
@@ -1614,16 +1808,10 @@
             }
           },
           plugins: {
-            legend: {
-              display: true,
-              labels: {
-                color: "#111827",
-                font: { size: 10 }
-              }
-            },
+            legend: { display: true, labels: { color: "#111827", font: { size: 10 } } },
             tooltip: {
               callbacks: {
-                label: function (ctx) {
+                label: ctx => {
                   const v = ctx.parsed.r || 0;
                   const label = ctx.label || "";
                   return `${label}: ${v} ação${v === 1 ? "" : "es"}`;
@@ -1640,11 +1828,7 @@
           radarCategoriasChart.options = optionsCat;
           radarCategoriasChart.update();
         } else {
-          radarCategoriasChart = new Chart(ctxCat, {
-            type: "radar",
-            data: dataCat,
-            options: optionsCat
-          });
+          radarCategoriasChart = new Chart(ctxCat, { type: "radar", data: dataCat, options: optionsCat });
         }
       }
 
@@ -1663,18 +1847,15 @@
         const lista = document.getElementById("lista-" + tipo);
         const tag = document.getElementById("tag-" + tipo);
 
-        // Calcula TOP 5 ordenado por score
         const top5 = dados
           .slice()
           .sort((a, b) => (b.score || 0) - (a.score || 0))
           .slice(0, 5);
 
-        // Atualiza cache para o Painel TOP 5
         top5Cache[tipo] = top5;
 
         if (lista) {
           lista.innerHTML = "";
-
           top5.forEach(item => {
             const li = document.createElement("li");
             li.className = "resumo-item";
@@ -1746,19 +1927,16 @@
           });
         }
 
-        if (tag) {
-          tag.textContent = `${totalItens} item${totalItens === 1 ? "" : "s"}`;
-        }
+        if (tag) tag.textContent = `${totalItens} item${totalItens === 1 ? "" : "s"}`;
 
         atualizarRadar();
-        atualizarPainelTop5(); // mantém painel visual sincronizado
+        atualizarPainelTop5();
       }
 
       function atualizarTodosResumos() {
         tipos.forEach(t => atualizarResumoTipo(t));
       }
 
-      // Preenche Painel TOP 5 visual
       function atualizarPainelTop5() {
         const mapIds = {
           forcas: "top5-list-forcas",
@@ -1772,10 +1950,8 @@
           if (!ul) return;
 
           let top5 = top5Cache[tipo];
-
-          // Se por algum motivo o cache estiver vazio, recalcula a partir da tabela
           if (!top5 || !top5.length) {
-            const dados = lerTabela(tipos);
+            const dados = lerTabela(tipo);
             top5 = dados
               .slice()
               .sort((a, b) => (b.score || 0) - (a.score || 0))
@@ -1788,15 +1964,11 @@
             const li = document.createElement("li");
             const desc = item.descricao || "(sem descrição)";
             const score = item.score || 0;
-
             li.innerHTML = `
               <div class="top5-item-line">
-                <div class="top5-item-text">
-                  ${idx + 1}. ${desc}
-                </div>
+                <div class="top5-item-text">${idx + 1}. ${desc}</div>
                 <div class="top5-score-pill">${score}</div>
-              </div>
-            `;
+              </div>`;
             ul.appendChild(li);
           });
         });
@@ -1837,17 +2009,16 @@
       }
 
       function preencherContextoDoExcel(linhasCtx) {
-        // Espera formato: [ ["Campo","Valor"], [...], ... ]
         const mapa = {};
         linhasCtx.forEach((row, idx) => {
-          if (idx === 0) return; // cabeçalho
+          if (idx === 0) return;
           const campo = row[0];
           const valor = row[1];
           if (!campo) return;
           mapa[campo] = valor || "";
         });
 
-        const m = (nome) => mapa[nome] || "";
+        const m = nome => mapa[nome] || "";
 
         const tema = document.getElementById("ctx-tema");
         const objetivo = document.getElementById("ctx-objetivo");
@@ -1880,14 +2051,12 @@
             const data = new Uint8Array(e.target.result);
             const wb = XLSX.read(data, { type: "array" });
 
-            // 1) Contexto A3
             const wsCtx = wb.Sheets["Contexto A3"];
             if (wsCtx) {
               const linhasCtx = XLSX.utils.sheet_to_json(wsCtx, { header: 1, defval: "" });
               preencherContextoDoExcel(linhasCtx);
             }
 
-            // 2) Quadrantes SWOT – planilhas "Forças", "Fraquezas", "Oportunidades", "Ameaças"
             const mapeamentoSheetPorTipo = {
               forcas: "Forças",
               fraquezas: "Fraquezas",
@@ -1994,7 +2163,6 @@
 
         tipos.forEach(tipo => {
           doc.addPage();
-
           const titulo = "Matriz SWOT + GUT – " + labels[tipo];
           doc.setFontSize(14);
           doc.text(titulo, 10, 10);
@@ -2080,11 +2248,50 @@
         XLSX.writeFile(wb, "matriz-swot-gut-a3.xlsx");
       }
 
+      /* A3 Estratégico – linhas dinâmicas e gerência */
+      function initA3Estrategico() {
+        const gerenciaSelect = document.getElementById("a3-gerencia");
+        const status = document.getElementById("a3-gerencia-status");
+
+        if (gerenciaSelect && status) {
+          gerenciaSelect.addEventListener("change", () => {
+            const val = gerenciaSelect.value;
+            status.textContent = val ? `Gerência selecionada: ${val}.` : "Nenhuma gerência selecionada.";
+          });
+        }
+
+        const blocos = document.querySelectorAll(".a3-block");
+        blocos.forEach(bloco => {
+          const btnAdd = bloco.querySelector(".a3-add-line");
+          const linhasContainer = bloco.querySelector(".a3-lines");
+          if (!btnAdd || !linhasContainer) return;
+
+          function addLinha() {
+            const div = document.createElement("div");
+            div.className = "a3-line";
+            div.innerHTML = `
+              <textarea placeholder="Digite uma linha deste bloco..."></textarea>
+              <button type="button" class="a3-remove-line" title="Remover linha">✕</button>
+            `;
+            const btnRemove = div.querySelector(".a3-remove-line");
+            btnRemove.addEventListener("click", () => {
+              div.remove();
+            });
+            linhasContainer.appendChild(div);
+          }
+
+          btnAdd.addEventListener("click", addLinha);
+
+          /* começa com uma linha em cada bloco */
+          addLinha();
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
         initTabs();
         initExportacoes();
+        initA3Estrategico();
 
-        // Sempre começa com 1 linha em branco em cada tabela
         tipos.forEach(t => addRow(t));
 
         atualizarTodosResumos();
@@ -2094,4 +2301,3 @@
   </script>
 </body>
 </html>
-```
