@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,18 +9,19 @@
   <!-- Estilos -->
   <style>
     :root {
-      --bg: #04141f;
-      --bg-elevated: #071d2c;
-      --accent-1: #00a19a; /* teal / ERO-style */
-      --accent-2: #f27f3d; /* cobre / laranja */
-      --accent-3: #ffd166; /* amarelo destaque */
-      --accent-4: #e63946; /* alerta / risco */
-      --accent-muted: #64748b;
-      --border-subtle: #123047;
-      --text-main: #e5f4ff;
-      --text-soft: #9fb3c8;
+      /* Tema claro para telão */
+      --bg: #ffffff;
+      --bg-elevated: #f9fafb;
+      --accent-1: #0f766e;  /* teal */
+      --accent-2: #b45309;  /* cobre / laranja */
+      --accent-3: #f59e0b;  /* amarelo */
+      --accent-4: #b91c1c;  /* vermelho alerta */
+      --accent-muted: #6b7280;
+      --border-subtle: #d1d5db;
+      --text-main: #111827;
+      --text-soft: #4b5563;
       --card-radius: 14px;
-      --shadow-soft: 0 22px 45px rgba(4, 20, 31, 0.85);
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.16);
     }
 
     * {
@@ -30,8 +31,12 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
+    html, body {
+      font-size: 18px; /* base maior para telão */
+    }
+
     body {
-      background: radial-gradient(circle at top, #092338 0, var(--bg) 55%, var(--bg) 100%);
+      background: #ffffff;
       color: var(--text-main);
       min-height: 100vh;
       padding: 24px;
@@ -58,33 +63,35 @@
     }
 
     .title {
-      font-size: 1.6rem;
-      font-weight: 700;
+      font-size: 1.9rem;
+      font-weight: 800;
       letter-spacing: 0.02em;
       display: flex;
       align-items: baseline;
       gap: 8px;
       flex-wrap: wrap;
+      color: var(--text-main);
     }
 
     .title span.accent {
-      background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+      background: linear-gradient(120deg, #0ea5e9, #22c55e, #f97316);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .title-plan {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-soft);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent-2);
     }
 
     .subtitle {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--text-soft);
-      margin-top: 4px;
-      max-width: 520px;
+      margin-top: 6px;
+      max-width: 720px;
+      line-height: 1.4;
     }
 
     .header-actions {
@@ -96,29 +103,29 @@
 
     .pill {
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 6px 10px;
-      font-size: 0.75rem;
+      border: 1px solid var(--border-subtle);
+      padding: 8px 12px;
+      font-size: 0.95rem;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       color: var(--text-soft);
-      background: linear-gradient(120deg, rgba(7, 29, 44, 0.95), rgba(7, 29, 44, 0.8));
+      background: radial-gradient(circle at top left, #e0f2fe, #f4f4ff);
     }
 
     .pill-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, var(--accent-1), #016d68);
-      box-shadow: 0 0 10px rgba(0, 161, 154, 0.8);
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a);
+      box-shadow: 0 0 8px rgba(22, 163, 74, 0.8);
     }
 
     .btn {
       border: none;
       border-radius: 999px;
       padding: 8px 16px;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -131,10 +138,10 @@
     }
 
     .btn-menu {
-      background: rgba(7, 29, 44, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      color: var(--text-main);
-      box-shadow: 0 10px 25px rgba(4, 20, 31, 0.6);
+      background: #111827;
+      border: 1px solid #0f172a;
+      color: #f9fafb;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
     }
 
     .btn-menu::before {
@@ -147,28 +154,28 @@
     }
 
     .btn-pdf {
-      background: linear-gradient(135deg, var(--accent-2), #ff9a5a);
-      border-color: rgba(242, 127, 61, 0.7);
-      color: #04141f;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      border-color: rgba(234, 88, 12, 0.8);
+      color: #111827;
     }
 
     .btn-pdf::before {
-      background: radial-gradient(circle at top, rgba(242, 127, 61, 0.45), transparent 60%);
+      background: radial-gradient(circle at top, rgba(248, 180, 75, 0.4), transparent 60%);
     }
 
     .btn-excel {
-      background: linear-gradient(135deg, var(--accent-1), #5be7d0);
-      border-color: rgba(0, 161, 154, 0.8);
-      color: #04141f;
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      border-color: rgba(21, 128, 61, 0.8);
+      color: #f9fafb;
     }
 
     .btn-excel::before {
-      background: radial-gradient(circle at top, rgba(0, 161, 154, 0.4), transparent 60%);
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.4), transparent 60%);
     }
 
     .btn-menu:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(4, 20, 31, 0.85);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.55);
     }
 
     .btn-menu:hover::before {
@@ -180,63 +187,78 @@
     }
 
     .main-card {
-      background: radial-gradient(circle at top left, #0c2237 0, var(--bg-elevated) 55%, var(--bg-elevated) 100%);
-      border-radius: 20px;
-      border: 1px solid rgba(148,163,184,0.35);
+      background: radial-gradient(circle at top left, #eef2ff, #f9fafb 35%, #ffffff 80%);
+      border-radius: 24px;
+      border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 20px;
     }
 
     .context-card {
       border-radius: 16px;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.98), var(--bg-elevated));
-      padding: 10px 12px 12px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 12px 14px 14px;
       margin-bottom: 14px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .context-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.06), transparent 55%);
+      pointer-events: none;
     }
 
     .context-title {
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-soft);
       font-weight: 600;
+      position: relative;
+      z-index: 1;
     }
 
     .context-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px 12px;
+      gap: 10px 14px;
       margin-top: 4px;
+      position: relative;
+      z-index: 1;
     }
 
     .context-field {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      font-size: 0.78rem;
+      gap: 4px;
+      font-size: 0.9rem;
     }
 
     .context-field label {
       color: var(--text-soft);
+      font-weight: 500;
     }
 
     .context-field input,
     .context-field textarea {
-      padding: 4px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(7,29,44,0.96);
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
       color: var(--text-main);
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       resize: vertical;
     }
 
     .context-field textarea {
-      min-height: 40px;
+      min-height: 52px;
     }
 
     @media (max-width: 720px) {
@@ -250,18 +272,19 @@
       flex-wrap: wrap;
       gap: 6px;
       margin-bottom: 14px;
+      margin-top: 4px;
     }
 
     .tab-btn {
-      flex: 1 1 120px;
-      min-width: 120px;
+      flex: 1 1 140px;
+      min-width: 140px;
       border-radius: 999px;
       padding: 8px 12px;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      border: 1px solid transparent;
+      border: 1px solid #e5e7eb;
       cursor: pointer;
-      background: radial-gradient(circle at top, rgba(7,29,44,0.9), rgba(7,29,44,0.7));
+      background: #f9fafb;
       color: var(--text-soft);
       display: flex;
       align-items: center;
@@ -271,22 +294,23 @@
     }
 
     .tab-btn span.dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 999px;
     }
 
     .tab-btn[data-tab="forcas"] span.dot { background: var(--accent-1); }
     .tab-btn[data-tab="fraquezas"] span.dot { background: var(--accent-4); }
     .tab-btn[data-tab="oportunidades"] span.dot { background: var(--accent-2); }
-    .tab-btn[data-tab="ameacas"] span.dot { background: var(--accent-3); }
+    .tab-btn[data-tab="ameacas"] span.dot { background: #7c3aed; }
     .tab-btn[data-tab="resumo"] span.dot { background: var(--accent-muted); }
+    .tab-btn[data-tab="painel-top5"] span.dot { background: #0ea5e9; }
 
     .tab-btn.active {
-      color: #e5fef3;
-      border-color: rgba(148,163,184,0.6);
-      background: linear-gradient(135deg, rgba(0,161,154,0.16), rgba(242,127,61,0.24));
-      box-shadow: 0 14px 34px rgba(4,20,31,0.9);
+      color: #ffffff;
+      border-color: transparent;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.55);
     }
 
     .tab-btn .label {
@@ -302,10 +326,10 @@
     }
 
     .summary-chip {
-      flex: 1 1 180px;
+      flex: 1 1 200px;
       border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
+      border: 1px solid #e5e7eb;
+      background: linear-gradient(135deg, #ffffff, #f3f4ff);
       padding: 10px 12px;
       display: flex;
       flex-direction: column;
@@ -316,7 +340,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
     }
 
     .summary-chip-title {
@@ -326,12 +351,12 @@
     }
 
     .summary-chip-value {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 700;
     }
 
     .summary-chip-sub {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       color: var(--text-soft);
     }
 
@@ -347,24 +372,24 @@
     .table-wrapper {
       margin-top: 6px;
       border-radius: var(--card-radius);
-      border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.98), var(--bg-elevated));
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
       overflow: hidden;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8rem;
+      font-size: 0.95rem;
     }
 
     thead {
-      background: linear-gradient(135deg, rgba(148,163,184,0.15), rgba(7,29,44,0.9));
+      background: linear-gradient(135deg, #e5e7eb, #e0f2fe);
     }
 
     th, td {
-      padding: 6px 8px;
-      border-bottom: 1px solid rgba(7,16,28,0.9);
+      padding: 8px 10px;
+      border-bottom: 1px solid #e5e7eb;
       vertical-align: middle;
     }
 
@@ -373,53 +398,54 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       color: var(--text-soft);
     }
 
     tbody tr:nth-child(even) {
-      background: rgba(7,29,44,0.75);
+      background: #f9fafb;
     }
 
     tbody tr:nth-child(odd) {
-      background: rgba(7,29,44,0.95);
+      background: #ffffff;
     }
 
     tbody tr:hover {
-      background: rgba(30,64,175,0.45);
+      background: #e0f2fe;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 4px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(7,29,44,0.9);
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
       color: var(--text-main);
-      font-size: 0.8rem;
+      font-size: 0.95rem;
     }
 
     select {
       width: 100%;
-      padding: 4px 6px;
+      padding: 6px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(7,29,44,0.96);
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
       color: var(--text-main);
-      font-size: 0.78rem;
+      font-size: 0.95rem;
     }
 
     .score-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 52px;
-      padding: 4px 10px;
+      min-width: 60px;
+      padding: 4px 12px;
       border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      background: radial-gradient(circle at top, rgba(0,161,154,0.18), rgba(242,127,61,0.18));
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      color: #111827;
     }
 
     .row-actions {
@@ -428,13 +454,13 @@
     }
 
     .btn-icon {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.45);
-      background: rgba(7,29,44,0.9);
+      border: 1px solid #d1d5db;
+      background: #e5e7eb;
       color: var(--text-soft);
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -443,64 +469,64 @@
     }
 
     .btn-icon:hover {
-      background: rgba(7,29,44,1);
-      color: #e2e8f0;
+      background: #d1d5db;
+      color: #111827;
     }
 
     .table-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 12px;
-      background: radial-gradient(circle at top left, rgba(7,29,44,1), rgba(7,29,44,0.85));
-      border-top: 1px solid rgba(7,16,28,0.9);
+      padding: 8px 10px;
+      background: #f3f4f6;
+      border-top: 1px solid #d1d5db;
     }
 
     .table-footer-left {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       color: var(--text-soft);
     }
 
     .table-footer-highlight {
       font-weight: 600;
-      color: #e5fef3;
+      color: #065f46;
     }
 
-    /* LEGENDA GUT – 3 LINHAS, VISUAL PREMIUM */
+    /* LEGENDA GUT – fontes maiores */
     .gut-legend {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      font-size: 0.72rem;
+      gap: 6px;
+      font-size: 0.95rem;
       color: var(--text-soft);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .gut-pill {
       border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(148,163,184,0.4);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.85));
-      box-shadow: 0 8px 18px rgba(4,20,31,0.65);
+      padding: 6px 12px;
+      border: 1px solid #d1d5db;
+      background: linear-gradient(135deg, #f9fafb, #eff6ff);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .gut-pill strong {
-      color: #e5f4ff;
+      color: var(--text-main);
     }
 
     .add-row-btn {
-      font-size: 0.78rem;
-      padding: 6px 10px;
+      font-size: 0.95rem;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(7,29,44,0.9);
+      background: #e5e7eb;
       color: var(--text-main);
-      border: 1px dashed rgba(148,163,184,0.7);
+      border: 1px dashed #9ca3af;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -508,14 +534,14 @@
     }
 
     .add-row-btn:hover {
-      background: rgba(7,29,44,1);
+      background: #d1d5db;
     }
 
     .resumo-radar-card {
       border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
-      padding: 10px 12px 16px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 12px 14px 16px;
       margin-top: 10px;
       display: flex;
       flex-direction: column;
@@ -524,7 +550,7 @@
 
     .resumo-radar-card canvas {
       width: 100%;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -540,8 +566,8 @@
 
     .resumo-card {
       border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.35);
-      background: radial-gradient(circle at top left, rgba(7,29,44,0.95), rgba(7,29,44,0.82));
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
       padding: 10px 12px;
       display: flex;
       flex-direction: column;
@@ -557,7 +583,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
     }
 
     .resumo-card-title {
@@ -567,41 +594,192 @@
     }
 
     .resumo-card-tag {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       color: var(--text-soft);
     }
 
     .resumo-list {
-      margin-left: 18px;
-      font-size: 0.78rem;
+      margin-left: 20px;
+      font-size: 0.95rem;
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
     .resumo-item-titulo {
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       margin-bottom: 3px;
     }
 
     .resumo-item-form {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
-      font-size: 0.72rem;
+      gap: 6px;
+      font-size: 0.9rem;
       margin-bottom: 2px;
     }
 
     .resumo-item-form input,
     .resumo-item-form select {
-      flex: 1 1 120px;
-      min-width: 120px;
-      padding: 3px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(7,29,44,0.96);
+      flex: 1 1 160px;
+      min-width: 160px;
+      padding: 5px 8px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
       color: var(--text-main);
-      font-size: 0.72rem;
+      font-size: 0.9rem;
+    }
+
+    /* PAINEL TOP 5 – NOVA ABA VISUAL */
+    .top5-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .top5-card {
+      border-radius: 18px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #0f172a;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    .top5-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .top5-forcas {
+      border: 1px solid #bbf7d0;
+      background: radial-gradient(circle at top left, #bbf7d0, #ecfdf5 40%, #ffffff 100%);
+    }
+
+    .top5-fraquezas {
+      border: 1px solid #fecaca;
+      background: radial-gradient(circle at top left, #fecaca, #fef2f2 40%, #ffffff 100%);
+    }
+
+    .top5-oportunidades {
+      border: 1px solid #fde68a;
+      background: radial-gradient(circle at top left, #fde68a, #fffbeb 40%, #ffffff 100%);
+    }
+
+    .top5-ameacas {
+      border: 1px solid #bfdbfe;
+      background: radial-gradient(circle at top left, #bfdbfe, #eff6ff 40%, #ffffff 100%);
+    }
+
+    .top5-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .top5-chip {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(15,23,42,0.06);
+    }
+
+    .top5-chip-forcas {
+      background: rgba(22,163,74,0.1);
+      color: #166534;
+    }
+
+    .top5-chip-fraquezas {
+      background: rgba(239,68,68,0.1);
+      color: #b91c1c;
+    }
+
+    .top5-chip-oportunidades {
+      background: rgba(245,158,11,0.1);
+      color: #92400e;
+    }
+
+    .top5-chip-ameacas {
+      background: rgba(59,130,246,0.1);
+      color: #1d4ed8;
+    }
+
+    .top5-subtitle {
+      font-size: 0.8rem;
+      color: rgba(15,23,42,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .top5-list {
+      margin-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+      list-style: none;
+    }
+
+    .top5-item-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .top5-item-text {
+      flex: 1 1 auto;
+    }
+
+    .top5-score-pill {
+      min-width: 52px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .top5-forcas .top5-score-pill {
+      background: #bbf7d0;
+      color: #14532d;
+    }
+
+    .top5-fraquezas .top5-score-pill {
+      background: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .top5-oportunidades .top5-score-pill {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .top5-ameacas .top5-score-pill {
+      background: #bfdbfe;
+      color: #1d4ed8;
+    }
+
+    @media (max-width: 1024px) {
+      .top5-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 720px) {
@@ -613,14 +791,72 @@
           "ameacas";
         grid-template-columns: 1fr;
       }
+      .top5-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     footer {
       margin-top: 12px;
       text-align: right;
-      font-size: 0.6rem;
-      color: #64748b;
+      font-size: 0.8rem;
+      color: #6b7280;
       opacity: 0.9;
+    }
+
+    /* Ajustes específicos para telão 512x896 (layout estreito) */
+    @media (max-width: 896px) {
+      html, body {
+        font-size: 20px; /* letras ainda maiores no telão */
+      }
+
+      body {
+        padding: 8px;
+      }
+
+      .app-shell {
+        max-width: 512px;
+        width: 100%;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .summary-row {
+        flex-direction: column;
+      }
+
+      .tab-header {
+        flex-direction: column;
+      }
+
+      .tab-btn {
+        width: 100%;
+      }
+
+      .context-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo-grid {
+        grid-template-areas:
+          "forcas"
+          "oportunidades"
+          "fraquezas"
+          "ameacas";
+        grid-template-columns: 1fr;
+      }
+
+      .top5-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
@@ -723,6 +959,10 @@
         <button class="tab-btn" data-tab="resumo">
           <span class="dot"></span>
           <span class="label">Resumo SWOT</span>
+        </button>
+        <button class="tab-btn" data-tab="painel-top5">
+          <span class="dot"></span>
+          <span class="label">Painel TOP 5</span>
         </button>
       </div>
 
@@ -990,6 +1230,47 @@
           </div>
         </div>
       </section>
+
+      <!-- NOVA ABA: Painel TOP 5 visual por quadrante -->
+      <section class="tab-content" id="tab-painel-top5">
+        <div class="top5-grid">
+          <div class="top5-card top5-forcas">
+            <div class="top5-header">
+              <span>TOP 5 FORÇAS</span>
+              <span class="top5-chip top5-chip-forcas">Potencial competitivo</span>
+            </div>
+            <div class="top5-subtitle">Da maior para a menor pontuação GUT</div>
+            <ol class="top5-list" id="top5-list-forcas"></ol>
+          </div>
+
+          <div class="top5-card top5-fraquezas">
+            <div class="top5-header">
+              <span>TOP 5 FRAQUEZAS</span>
+              <span class="top5-chip top5-chip-fraquezas">Riscos internos</span>
+            </div>
+            <div class="top5-subtitle">Da maior para a menor pontuação GUT</div>
+            <ol class="top5-list" id="top5-list-fraquezas"></ol>
+          </div>
+
+          <div class="top5-card top5-oportunidades">
+            <div class="top5-header">
+              <span>TOP 5 OPORTUNIDADES</span>
+              <span class="top5-chip top5-chip-oportunidades">Alavancas de valor</span>
+            </div>
+            <div class="top5-subtitle">Da maior para a menor pontuação GUT</div>
+            <ol class="top5-list" id="top5-list-oportunidades"></ol>
+          </div>
+
+          <div class="top5-card top5-ameacas">
+            <div class="top5-header">
+              <span>TOP 5 AMEAÇAS</span>
+              <span class="top5-chip top5-chip-ameacas">Pressões externas</span>
+            </div>
+            <div class="top5-subtitle">Da maior para a menor pontuação GUT</div>
+            <ol class="top5-list" id="top5-list-ameacas"></ol>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -1024,6 +1305,14 @@
         ameacas: {}
       };
 
+      // Cache de TOP 5 por quadrante para o painel visual
+      let top5Cache = {
+        forcas: [],
+        fraquezas: [],
+        oportunidades: [],
+        ameacas: []
+      };
+
       let radarChart = null;
       let radarCategoriasChart = null;
 
@@ -1045,6 +1334,9 @@
 
             if (tab === "resumo") {
               setTimeout(() => atualizarRadar(true), 0);
+            }
+            if (tab === "painel-top5") {
+              atualizarPainelTop5();
             }
           });
         });
@@ -1221,10 +1513,10 @@
             {
               label: "Pontuação total GUT",
               data: scores,
-              borderColor: "rgba(56,189,248,0.9)",
-              backgroundColor: "rgba(56,189,248,0.22)",
-              pointBackgroundColor: "#00a19a",
-              pointBorderColor: "#e5fef3",
+              borderColor: "rgba(37,99,235,0.9)",
+              backgroundColor: "rgba(59,130,246,0.18)",
+              pointBackgroundColor: "#1d4ed8",
+              pointBorderColor: "#ffffff",
               pointRadius: 4,
               borderWidth: 2
             }
@@ -1235,11 +1527,11 @@
           responsive: true,
           scales: {
             r: {
-              angleLines: { color: "rgba(148,163,184,0.35)" },
-              grid: { color: "rgba(30,64,175,0.45)" },
+              angleLines: { color: "rgba(156,163,175,0.6)" },
+              grid: { color: "rgba(209,213,219,0.9)" },
               pointLabels: {
-                color: "#e2e8f0",
-                font: { size: 10 }
+                color: "#111827",
+                font: { size: 11 }
               },
               ticks: { display: false }
             }
@@ -1248,8 +1540,8 @@
             legend: {
               display: true,
               labels: {
-                color: "#e2e8f0",
-                font: { size: 9 }
+                color: "#111827",
+                font: { size: 10 }
               }
             }
           }
@@ -1292,10 +1584,10 @@
             {
               label: "Quantidade de ações por categoria",
               data: categoriasBase.map(c => contagemCategorias[c]),
-              borderColor: "rgba(244,114,182,0.9)",
+              borderColor: "rgba(217,70,239,0.9)",
               backgroundColor: "rgba(244,114,182,0.18)",
-              pointBackgroundColor: "#f97316",
-              pointBorderColor: "#fefce8",
+              pointBackgroundColor: "#db2777",
+              pointBorderColor: "#ffffff",
               pointRadius: 4,
               borderWidth: 2
             }
@@ -1306,15 +1598,15 @@
           responsive: true,
           scales: {
             r: {
-              angleLines: { color: "rgba(148,163,184,0.3)" },
-              grid: { color: "rgba(88,28,135,0.5)" },
+              angleLines: { color: "rgba(156,163,175,0.6)" },
+              grid: { color: "rgba(209,213,219,0.9)" },
               pointLabels: {
-                color: "#e5e7eb",
-                font: { size: 10 }
+                color: "#111827",
+                font: { size: 11 }
               },
               ticks: {
                 display: true,
-                color: "#9ca3af",
+                color: "#4b5563",
                 backdropColor: "transparent",
                 stepSize: 1,
                 precision: 0
@@ -1325,8 +1617,8 @@
             legend: {
               display: true,
               labels: {
-                color: "#e5e7eb",
-                font: { size: 9 }
+                color: "#111827",
+                font: { size: 10 }
               }
             },
             tooltip: {
@@ -1371,12 +1663,17 @@
         const lista = document.getElementById("lista-" + tipo);
         const tag = document.getElementById("tag-" + tipo);
 
+        // Calcula TOP 5 ordenado por score
+        const top5 = dados
+          .slice()
+          .sort((a, b) => (b.score || 0) - (a.score || 0))
+          .slice(0, 5);
+
+        // Atualiza cache para o Painel TOP 5
+        top5Cache[tipo] = top5;
+
         if (lista) {
           lista.innerHTML = "";
-          const top5 = dados
-            .slice()
-            .sort((a, b) => (b.score || 0) - (a.score || 0))
-            .slice(0, 5);
 
           top5.forEach(item => {
             const li = document.createElement("li");
@@ -1454,10 +1751,55 @@
         }
 
         atualizarRadar();
+        atualizarPainelTop5(); // mantém painel visual sincronizado
       }
 
       function atualizarTodosResumos() {
         tipos.forEach(t => atualizarResumoTipo(t));
+      }
+
+      // Preenche Painel TOP 5 visual
+      function atualizarPainelTop5() {
+        const mapIds = {
+          forcas: "top5-list-forcas",
+          fraquezas: "top5-list-fraquezas",
+          oportunidades: "top5-list-oportunidades",
+          ameacas: "top5-list-ameacas"
+        };
+
+        tipos.forEach(tipo => {
+          const ul = document.getElementById(mapIds[tipo]);
+          if (!ul) return;
+
+          let top5 = top5Cache[tipo];
+
+          // Se por algum motivo o cache estiver vazio, recalcula a partir da tabela
+          if (!top5 || !top5.length) {
+            const dados = lerTabela(tipos);
+            top5 = dados
+              .slice()
+              .sort((a, b) => (b.score || 0) - (a.score || 0))
+              .slice(0, 5);
+            top5Cache[tipo] = top5;
+          }
+
+          ul.innerHTML = "";
+          top5.forEach((item, idx) => {
+            const li = document.createElement("li");
+            const desc = item.descricao || "(sem descrição)";
+            const score = item.score || 0;
+
+            li.innerHTML = `
+              <div class="top5-item-line">
+                <div class="top5-item-text">
+                  ${idx + 1}. ${desc}
+                </div>
+                <div class="top5-score-pill">${score}</div>
+              </div>
+            `;
+            ul.appendChild(li);
+          });
+        });
       }
 
       function limparTabela(tipo) {
@@ -1569,6 +1911,7 @@
 
             atualizarTodosResumos();
             atualizarRadar(true);
+            atualizarPainelTop5();
             alert("Excel importado com sucesso. A matriz foi preenchida a partir do arquivo.");
           } catch (err) {
             console.error(err);
@@ -1745,8 +2088,10 @@
         tipos.forEach(t => addRow(t));
 
         atualizarTodosResumos();
+        atualizarPainelTop5();
       });
     })();
   </script>
 </body>
 </html>
+```
